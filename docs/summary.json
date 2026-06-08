@@ -1,0 +1,1144 @@
+{
+  "total": 657,
+  "total_books": 6,
+  "total_chapters": 152,
+  "review_count": 254,
+  "resolved_count": 403,
+  "with_answer": 347,
+  "by_book": {
+    "ویلیامز": 283,
+    "نواک": 139,
+    "اسپیروف": 122,
+    "تلیندز": 84,
+    "آپتودیت": 17,
+    "سایر": 12
+  },
+  "primary_books": [
+    "ویلیامز",
+    "نواک",
+    "اسپیروف",
+    "تلیندز"
+  ],
+  "book_order": [
+    "ویلیامز",
+    "نواک",
+    "اسپیروف",
+    "تلیندز",
+    "آپتودیت",
+    "سایر"
+  ],
+  "books": [
+    {
+      "book_fa": "ویلیامز",
+      "count": 283,
+      "chapter_count": 64,
+      "is_primary": true,
+      "chapters": [
+        {
+          "chapter_key": "ویلیامز::2::آناتومی مادر",
+          "chapter": "2",
+          "chapter_title": "آناتومی مادر",
+          "count": 6,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::3::ناهنجاری تناسلی",
+          "chapter": "3",
+          "chapter_title": "ناهنجاری تناسلی",
+          "count": 3,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::4::فیزیولوژی مادر",
+          "chapter": "4",
+          "chapter_title": "فیزیولوژی مادر",
+          "count": 5,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::6::اختلالات جفت",
+          "chapter": "6",
+          "chapter_title": "اختلالات جفت",
+          "count": 4,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "ویلیامز::7::امبریوژنز",
+          "chapter": "7",
+          "chapter_title": "امبریوژنز",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::8::تراتوژن‌ها",
+          "chapter": "8",
+          "chapter_title": "تراتوژن‌ها",
+          "count": 8,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::9::مشاوره قبل بارداری",
+          "chapter": "9",
+          "chapter_title": "مشاوره قبل بارداری",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::10::مراقبت پرناتال",
+          "chapter": "10",
+          "chapter_title": "مراقبت پرناتال",
+          "count": 5,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::11::سقط سه‌ماهه ۱ و ۲",
+          "chapter": "11",
+          "chapter_title": "سقط سه‌ماهه ۱ و ۲",
+          "count": 7,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "ویلیامز::12::EP",
+          "chapter": "12",
+          "chapter_title": "EP",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::13::GTD",
+          "chapter": "13",
+          "chapter_title": "GTD",
+          "count": 8,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::14::تصویربرداری جنین",
+          "chapter": "14",
+          "chapter_title": "تصویربرداری جنین",
+          "count": 7,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::15::آناتومی جنین",
+          "chapter": "15",
+          "chapter_title": "آناتومی جنین",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::16::ژنتیک",
+          "chapter": "16",
+          "chapter_title": "ژنتیک",
+          "count": 3,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::17::تشخیص پرناتال",
+          "chapter": "17",
+          "chapter_title": "تشخیص پرناتال",
+          "count": 7,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::19::درمان جنین",
+          "chapter": "19",
+          "chapter_title": "درمان جنین",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::20::ارزیابی آنتی‌پارتوم",
+          "chapter": "20",
+          "chapter_title": "ارزیابی آنتی‌پارتوم",
+          "count": 13,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::21::فیزیولوژی لیبر",
+          "chapter": "21",
+          "chapter_title": "فیزیولوژی لیبر",
+          "count": 2,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::22::لیبر نرمال",
+          "chapter": "22",
+          "chapter_title": "لیبر نرمال",
+          "count": 5,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::23::لیبر غیرنرمال",
+          "chapter": "23",
+          "chapter_title": "لیبر غیرنرمال",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::24::ارزیابی اینتراپارتوم",
+          "chapter": "24",
+          "chapter_title": "ارزیابی اینتراپارتوم",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::25::آنالژزی مامایی",
+          "chapter": "25",
+          "chapter_title": "آنالژزی مامایی",
+          "count": 4,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::26::القای لیبر",
+          "chapter": "26",
+          "chapter_title": "القای لیبر",
+          "count": 7,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::27::NVD",
+          "chapter": "27",
+          "chapter_title": "NVD",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::28::بریچ",
+          "chapter": "28",
+          "chapter_title": "بریچ",
+          "count": 3,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::29::OVD",
+          "chapter": "29",
+          "chapter_title": "OVD",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::30::سزارین / هیسترکتومی",
+          "chapter": "30",
+          "chapter_title": "سزارین / هیسترکتومی",
+          "count": 4,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::31::سزارین قبلی",
+          "chapter": "31",
+          "chapter_title": "سزارین قبلی",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::32::نوزاد",
+          "chapter": "32",
+          "chapter_title": "نوزاد",
+          "count": 6,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "ویلیامز::33::عوارض نوزادی",
+          "chapter": "33",
+          "chapter_title": "عوارض نوزادی",
+          "count": 6,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::34::نوزاد پرترم",
+          "chapter": "34",
+          "chapter_title": "نوزاد پرترم",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::35::مرده‌زایی",
+          "chapter": "35",
+          "chapter_title": "مرده‌زایی",
+          "count": 7,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::36::نفاس",
+          "chapter": "36",
+          "chapter_title": "نفاس",
+          "count": 9,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::37::عفونت نفاسی",
+          "chapter": "37",
+          "chapter_title": "عفونت نفاسی",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::40::سندرم پراکلامپسی",
+          "chapter": "40",
+          "chapter_title": "سندرم پراکلامپسی",
+          "count": 12,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::41::مدیریت پراکلامپسی",
+          "chapter": "41",
+          "chapter_title": "مدیریت پراکلامپسی",
+          "count": 7,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::42::خونریزی مامایی",
+          "chapter": "42",
+          "chapter_title": "خونریزی مامایی",
+          "count": 10,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "ویلیامز::43::خونریزی جفت",
+          "chapter": "43",
+          "chapter_title": "خونریزی جفت",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::44::خونریزی مامایی",
+          "chapter": "44",
+          "chapter_title": "خونریزی مامایی",
+          "count": 7,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::45::زایمان پرترم",
+          "chapter": "45",
+          "chapter_title": "زایمان پرترم",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::46::زایمان پست‌ترم",
+          "chapter": "46",
+          "chapter_title": "زایمان پست‌ترم",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::47::اختلال رشد جنین",
+          "chapter": "47",
+          "chapter_title": "اختلال رشد جنین",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::48::چندقلویی",
+          "chapter": "48",
+          "chapter_title": "چندقلویی",
+          "count": 3,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::49::ارزیابی مادر",
+          "chapter": "49",
+          "chapter_title": "ارزیابی مادر",
+          "count": 4,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "ویلیامز::50::تروما",
+          "chapter": "50",
+          "chapter_title": "تروما",
+          "count": 3,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::52::بیماری قلبی",
+          "chapter": "52",
+          "chapter_title": "بیماری قلبی",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::53::فشار خون مزمن",
+          "chapter": "53",
+          "chapter_title": "فشار خون مزمن",
+          "count": 5,
+          "review_count": 5
+        },
+        {
+          "chapter_key": "ویلیامز::54::بیماری ریه",
+          "chapter": "54",
+          "chapter_title": "بیماری ریه",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::55::ترومبوآمبولی",
+          "chapter": "55",
+          "chapter_title": "ترومبوآمبولی",
+          "count": 8,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::57::بیماری گوارشی",
+          "chapter": "57",
+          "chapter_title": "بیماری گوارشی",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::58::اختلالات کبدی",
+          "chapter": "58",
+          "chapter_title": "اختلالات کبدی",
+          "count": 3,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::59::هماتولوژی",
+          "chapter": "59",
+          "chapter_title": "هماتولوژی",
+          "count": 3,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::60::دیابت",
+          "chapter": "60",
+          "chapter_title": "دیابت",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "ویلیامز::61::اندوکرینولوژی",
+          "chapter": "61",
+          "chapter_title": "اندوکرینولوژی",
+          "count": 7,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::62::بافت همبند",
+          "chapter": "62",
+          "chapter_title": "بافت همبند",
+          "count": 2,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::63::نورولوژی",
+          "chapter": "63",
+          "chapter_title": "نورولوژی",
+          "count": 6,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::64::بیماری روانی",
+          "chapter": "64",
+          "chapter_title": "بیماری روانی",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::65::بیماری پوستی",
+          "chapter": "65",
+          "chapter_title": "بیماری پوستی",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::66::نئوپلازی",
+          "chapter": "66",
+          "chapter_title": "نئوپلازی",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::67::بیماری عفونی",
+          "chapter": "67",
+          "chapter_title": "بیماری عفونی",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::68::STD",
+          "chapter": "68",
+          "chapter_title": "STD",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "ویلیامز::NEEDS_REVIEW::OF",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "OF",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "ویلیامز::NEEDS_REVIEW::بدون عنوان",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "بدون عنوان",
+          "count": 2,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "ویلیامز::NEEDS_REVIEW::PO",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "PO",
+          "count": 1,
+          "review_count": 1
+        }
+      ]
+    },
+    {
+      "book_fa": "نواک",
+      "count": 139,
+      "chapter_count": 33,
+      "is_primary": true,
+      "chapters": [
+        {
+          "chapter_key": "نواک::1::ارزیابی اولیه",
+          "chapter": "1",
+          "chapter_title": "ارزیابی اولیه",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::3::ایمنی و کیفیت",
+          "chapter": "3",
+          "chapter_title": "ایمنی و کیفیت",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::4::تحقیقات بالینی",
+          "chapter": "4",
+          "chapter_title": "تحقیقات بالینی",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::5::آناتومی و جنین‌شناسی",
+          "chapter": "5",
+          "chapter_title": "آناتومی و جنین‌شناسی",
+          "count": 5,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::9::ژنیکولوژی کودکان",
+          "chapter": "9",
+          "chapter_title": "ژنیکولوژی کودکان",
+          "count": 6,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::11::فیبروم رحمی",
+          "chapter": "11",
+          "chapter_title": "فیبروم رحمی",
+          "count": 3,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::12::دیسمنوره",
+          "chapter": "12",
+          "chapter_title": "دیسمنوره",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::14::تنظیم خانواده",
+          "chapter": "14",
+          "chapter_title": "تنظیم خانواده",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::15::STD",
+          "chapter": "15",
+          "chapter_title": "STD",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "نواک::16::خوش‌خیم سرویکس",
+          "chapter": "16",
+          "chapter_title": "خوش‌خیم سرویکس",
+          "count": 15,
+          "review_count": 9
+        },
+        {
+          "chapter_key": "نواک::17::اختلالات جنسی",
+          "chapter": "17",
+          "chapter_title": "اختلالات جنسی",
+          "count": 5,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::19::خوش‌خیم پستان",
+          "chapter": "19",
+          "chapter_title": "خوش‌خیم پستان",
+          "count": 5,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::20::تجاوز جنسی",
+          "chapter": "20",
+          "chapter_title": "تجاوز جنسی",
+          "count": 6,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::22::مراقبت اولیه",
+          "chapter": "22",
+          "chapter_title": "مراقبت اولیه",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "نواک::26::اندوسکوپی زنان",
+          "chapter": "26",
+          "chapter_title": "اندوسکوپی زنان",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::29::مجاری ادراری",
+          "chapter": "29",
+          "chapter_title": "مجاری ادراری",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::30::POP",
+          "chapter": "30",
+          "chapter_title": "POP",
+          "count": 5,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "نواک::37::سرطان رحم",
+          "chapter": "37",
+          "chapter_title": "سرطان رحم",
+          "count": 9,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::38::سرطان سرویکس",
+          "chapter": "38",
+          "chapter_title": "سرطان سرویکس",
+          "count": 12,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "نواک::39::سرطان تخمدان",
+          "chapter": "39",
+          "chapter_title": "سرطان تخمدان",
+          "count": 7,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "نواک::40::سرطان ولو",
+          "chapter": "40",
+          "chapter_title": "سرطان ولو",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::41::GTD",
+          "chapter": "41",
+          "chapter_title": "GTD",
+          "count": 4,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::42::سرطان سینه",
+          "chapter": "42",
+          "chapter_title": "سرطان سینه",
+          "count": 6,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::ارزیابی اولیه",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "ارزیابی اولیه",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::بدون عنوان",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "بدون عنوان",
+          "count": 7,
+          "review_count": 7
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::ژنتیک",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "ژنتیک",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::GTD",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "GTD",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::POP",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "POP",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::اختلالات جنسی",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "اختلالات جنسی",
+          "count": 2,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::اندوسکوپی زنان",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "اندوسکوپی زنان",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::13",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "13",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::آناتومی مادر",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "آناتومی مادر",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "نواک::NEEDS_REVIEW::PY",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "PY",
+          "count": 1,
+          "review_count": 1
+        }
+      ]
+    },
+    {
+      "book_fa": "اسپیروف",
+      "count": 122,
+      "chapter_count": 24,
+      "is_primary": true,
+      "chapters": [
+        {
+          "chapter_key": "اسپیروف::2::تخمدان و جنین‌شناسی",
+          "chapter": "2",
+          "chapter_title": "تخمدان و جنین‌شناسی",
+          "count": 5,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::3::رحم و قاعدگی",
+          "chapter": "3",
+          "chapter_title": "رحم و قاعدگی",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::5::سیکل قاعدگی",
+          "chapter": "5",
+          "chapter_title": "سیکل قاعدگی",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "اسپیروف::6::فیزیولوژی بارداری",
+          "chapter": "6",
+          "chapter_title": "فیزیولوژی بارداری",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::9::بلوغ نرمال و غیرنرمال",
+          "chapter": "9",
+          "chapter_title": "بلوغ نرمال و غیرنرمال",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::10::آمنوره",
+          "chapter": "10",
+          "chapter_title": "آمنوره",
+          "count": 8,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::11::PCO",
+          "chapter": "11",
+          "chapter_title": "PCO",
+          "count": 4,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::12::هیرسوتیسم",
+          "chapter": "12",
+          "chapter_title": "هیرسوتیسم",
+          "count": 6,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "اسپیروف::13::آدرنال و تولیدمثل",
+          "chapter": "13",
+          "chapter_title": "آدرنال و تولیدمثل",
+          "count": 6,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::14::اختلالات قاعدگی",
+          "chapter": "14",
+          "chapter_title": "اختلالات قاعدگی",
+          "count": 5,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::15::AUB",
+          "chapter": "15",
+          "chapter_title": "AUB",
+          "count": 8,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "اسپیروف::17::یائسگی",
+          "chapter": "17",
+          "chapter_title": "یائسگی",
+          "count": 8,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::19::چاقی",
+          "chapter": "19",
+          "chapter_title": "چاقی",
+          "count": 3,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::20::تیروئید",
+          "chapter": "20",
+          "chapter_title": "تیروئید",
+          "count": 3,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::25::نازایی زنان",
+          "chapter": "25",
+          "chapter_title": "نازایی زنان",
+          "count": 8,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::26::نازایی مردان",
+          "chapter": "26",
+          "chapter_title": "نازایی مردان",
+          "count": 7,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::27::I/O",
+          "chapter": "27",
+          "chapter_title": "I/O",
+          "count": 7,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "اسپیروف::28::ART",
+          "chapter": "28",
+          "chapter_title": "ART",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::29::حفظ باروری",
+          "chapter": "29",
+          "chapter_title": "حفظ باروری",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "اسپیروف::30::سقط مکرر",
+          "chapter": "30",
+          "chapter_title": "سقط مکرر",
+          "count": 4,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::31::ژنتیک",
+          "chapter": "31",
+          "chapter_title": "ژنتیک",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "اسپیروف::32::اندومتریوز",
+          "chapter": "32",
+          "chapter_title": "اندومتریوز",
+          "count": 7,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "اسپیروف::33::EP",
+          "chapter": "33",
+          "chapter_title": "EP",
+          "count": 7,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "اسپیروف::NEEDS_REVIEW::بدون عنوان",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "بدون عنوان",
+          "count": 3,
+          "review_count": 3
+        }
+      ]
+    },
+    {
+      "book_fa": "تلیندز",
+      "count": 84,
+      "chapter_count": 24,
+      "is_primary": true,
+      "chapters": [
+        {
+          "chapter_key": "تلیندز::1::آناتومی",
+          "chapter": "1",
+          "chapter_title": "آناتومی",
+          "count": 2,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "تلیندز::2::مراقبت قبل عمل",
+          "chapter": "2",
+          "chapter_title": "مراقبت قبل عمل",
+          "count": 6,
+          "review_count": 4
+        },
+        {
+          "chapter_key": "تلیندز::5::پوزیشن بیمار",
+          "chapter": "5",
+          "chapter_title": "پوزیشن بیمار",
+          "count": 7,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "تلیندز::6::تکنیک جراحی",
+          "chapter": "6",
+          "chapter_title": "تکنیک جراحی",
+          "count": 13,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::8::برش‌های جراحی",
+          "chapter": "8",
+          "chapter_title": "برش‌های جراحی",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::11::مراقبت بعد عمل",
+          "chapter": "11",
+          "chapter_title": "مراقبت بعد عمل",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::12::عفونت بعد عمل",
+          "chapter": "12",
+          "chapter_title": "عفونت بعد عمل",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::13::مراقبت حیاتی",
+          "chapter": "13",
+          "chapter_title": "مراقبت حیاتی",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::17::خوش‌خیم ولو",
+          "chapter": "17",
+          "chapter_title": "خوش‌خیم ولو",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::21::میومکتومی",
+          "chapter": "21",
+          "chapter_title": "میومکتومی",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::22::TVH",
+          "chapter": "22",
+          "chapter_title": "TVH",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::23::TAH",
+          "chapter": "23",
+          "chapter_title": "TAH",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "تلیندز::25::پره‌اینویزیو سرویکس",
+          "chapter": "25",
+          "chapter_title": "پره‌اینویزیو سرویکس",
+          "count": 1,
+          "review_count": 1
+        },
+        {
+          "chapter_key": "تلیندز::26::پره‌اینویزیو ولو",
+          "chapter": "26",
+          "chapter_title": "پره‌اینویزیو ولو",
+          "count": 2,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::27::سرطان رحم",
+          "chapter": "27",
+          "chapter_title": "سرطان رحم",
+          "count": 1,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::29::سرطان تخمدان",
+          "chapter": "29",
+          "chapter_title": "سرطان تخمدان",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::30::ساسپنشن",
+          "chapter": "30",
+          "chapter_title": "ساسپنشن",
+          "count": 4,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::33::جراحی بی‌اختیاری",
+          "chapter": "33",
+          "chapter_title": "جراحی بی‌اختیاری",
+          "count": 4,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "تلیندز::34::کولپوکلیزیس",
+          "chapter": "34",
+          "chapter_title": "کولپوکلیزیس",
+          "count": 5,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::37::عوارض ادراری عمل",
+          "chapter": "37",
+          "chapter_title": "عوارض ادراری عمل",
+          "count": 5,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "تلیندز::39::خونریزی بعد از عمل",
+          "chapter": "39",
+          "chapter_title": "خونریزی بعد از عمل",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::44::خونریزی مامایی",
+          "chapter": "44",
+          "chapter_title": "خونریزی مامایی",
+          "count": 4,
+          "review_count": 2
+        },
+        {
+          "chapter_key": "تلیندز::NEEDS_REVIEW::بدون عنوان",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "بدون عنوان",
+          "count": 3,
+          "review_count": 3
+        },
+        {
+          "chapter_key": "تلیندز::NEEDS_REVIEW::سرطان رحم",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "سرطان رحم",
+          "count": 1,
+          "review_count": 1
+        }
+      ]
+    },
+    {
+      "book_fa": "آپتودیت",
+      "count": 17,
+      "chapter_count": 5,
+      "is_primary": false,
+      "chapters": [
+        {
+          "chapter_key": "آپتودیت::UpToDate - خارج از پلنر::UpToDate - خارج از پلنر",
+          "chapter": "UpToDate - خارج از پلنر",
+          "chapter_title": "UpToDate - خارج از پلنر",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "آپتودیت::cervical cancer screening::cervical cancer screening",
+          "chapter": "cervical cancer screening",
+          "chapter_title": "cervical cancer screening",
+          "count": 2,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "آپتودیت::cervical cytology::cervical cytology",
+          "chapter": "cervical cytology",
+          "chapter_title": "cervical cytology",
+          "count": 6,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "آپتودیت::decreased fetal movement::decreased fetal movement",
+          "chapter": "decreased fetal movement",
+          "chapter_title": "decreased fetal movement",
+          "count": 3,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "آپتودیت::fecal incontinence::fecal incontinence",
+          "chapter": "fecal incontinence",
+          "chapter_title": "fecal incontinence",
+          "count": 4,
+          "review_count": 0
+        }
+      ]
+    },
+    {
+      "book_fa": "سایر",
+      "count": 12,
+      "chapter_count": 2,
+      "is_primary": false,
+      "chapters": [
+        {
+          "chapter_key": "سایر::Ethics / Other::اخلاق پزشکی / سایر",
+          "chapter": "Ethics / Other",
+          "chapter_title": "اخلاق پزشکی / سایر",
+          "count": 10,
+          "review_count": 0
+        },
+        {
+          "chapter_key": "سایر::NEEDS_REVIEW::نیازمند بازبینی",
+          "chapter": "NEEDS_REVIEW",
+          "chapter_title": "نیازمند بازبینی",
+          "count": 2,
+          "review_count": 2
+        }
+      ]
+    }
+  ]
+}
