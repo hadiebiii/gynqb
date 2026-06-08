@@ -4,27 +4,28 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>بانک سؤالات بورد زنان و زایمان</title>
-<meta name="description" content="مرور آزمونی سؤالات بورد، ارتقا و فلوشیپ زنان و زایمان بر اساس رفرنس و فصل" />
+<meta name="description" content="مرور آزمونی سؤالات زنان و زایمان بر اساس رفرنس و فصل" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
 <style>
   :root {
-    --bg: #f1f5f9;
+    --bg: #eef2f7;
     --surface: #ffffff;
     --surface-2: #f8fafc;
     --border: #e2e8f0;
     --text: #0f172a;
     --muted: #64748b;
     --primary: #2563eb;
+    --primary-dark: #1e3a8a;
     --primary-soft: #dbeafe;
-    --correct: #16a34a;
+    --correct: #15803d;
     --correct-soft: #dcfce7;
-    --wrong: #dc2626;
+    --correct-border: #86efac;
+    --wrong: #b91c1c;
     --wrong-soft: #fee2e2;
-    --warn: #b45309;
-    --warn-soft: #fef3c7;
+    --wrong-border: #fca5a5;
     --radius: 14px;
-    --shadow: 0 1px 3px rgba(15, 23, 42, .08), 0 8px 24px rgba(15, 23, 42, .05);
+    --shadow: 0 1px 3px rgba(15, 23, 42, .07), 0 10px 30px rgba(15, 23, 42, .06);
     font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
   }
   * { box-sizing: border-box; }
@@ -32,625 +33,569 @@
   body {
     background: var(--bg);
     color: var(--text);
-    line-height: 1.9;
+    line-height: 1.85;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--primary); }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 16px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 14px clamp(10px, 3vw, 22px) 40px; }
 
   /* ---------- Header ---------- */
   header.app {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
     color: #fff;
     border-radius: var(--radius);
-    padding: 22px 24px;
+    padding: 18px 22px;
     box-shadow: var(--shadow);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
-  header.app h1 { margin: 0 0 6px; font-size: 1.5rem; }
-  header.app p { margin: 0; opacity: .9; font-size: .95rem; }
-  .stats-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-  .stat-chip {
-    background: rgba(255, 255, 255, .15);
-    border: 1px solid rgba(255, 255, 255, .25);
-    border-radius: 999px;
-    padding: 5px 14px;
-    font-size: .85rem;
-  }
-  .stat-chip b { font-weight: 700; }
+  header.app h1 { margin: 0 0 4px; font-size: clamp(1.15rem, 3.4vw, 1.5rem); }
+  header.app p { margin: 0; opacity: .92; font-size: clamp(.82rem, 2.4vw, .95rem); }
 
   /* ---------- Layout ---------- */
-  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 18px; align-items: start; }
-  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .layout {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; }
+  }
 
-  .panel {
+  /* ---------- Filters ---------- */
+  .filters {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 12px;
+  }
+  @media (max-width: 880px) {
+    .filters { position: static; }
+  }
+  .filters h2 {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    color: var(--primary-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .field { margin-bottom: 13px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block;
+    font-size: .82rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--surface-2) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat left 12px center;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: .92rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+  }
+  select:disabled { opacity: .6; cursor: default; }
+  .reset-btn {
+    width: 100%;
+    margin-top: 4px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: .88rem;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .reset-btn:hover { background: #eef2f7; color: var(--text); }
+
+  /* ---------- Question card ---------- */
+  .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
-  .sidebar { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
-  @media (max-width: 860px) { .sidebar { position: static; max-height: none; } }
-
-  .panel h2 { font-size: 1.05rem; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
-  .section-label { font-size: .8rem; color: var(--muted); margin: 16px 0 8px; font-weight: 700; }
-
-  /* ---------- Book buttons ---------- */
-  .book-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .book-btn {
-    border: 1.5px solid var(--border);
+  .card-meta {
     background: var(--surface-2);
-    border-radius: 10px;
-    padding: 10px 8px;
-    cursor: pointer;
-    font: inherit;
-    text-align: center;
-    transition: all .15s;
-    color: var(--text);
-  }
-  .book-btn:hover { border-color: var(--primary); }
-  .book-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .book-btn .b-name { font-weight: 700; display: block; }
-  .book-btn .b-count { font-size: .78rem; opacity: .8; }
-
-  /* ---------- Chapter list ---------- */
-  .chapter-list { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
-  .chapter-btn {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    border-radius: 9px;
-    padding: 9px 11px;
-    cursor: pointer;
-    font: inherit;
-    text-align: right;
-    color: var(--text);
-    display: flex; justify-content: space-between; align-items: center; gap: 8px;
-    transition: all .12s;
-  }
-  .chapter-btn:hover { background: var(--surface-2); border-color: var(--primary); }
-  .chapter-btn.active { background: var(--primary-soft); border-color: var(--primary); font-weight: 700; }
-  .chapter-btn .c-title { flex: 1; }
-  .chapter-btn .c-count {
-    background: var(--surface-2); border: 1px solid var(--border);
-    border-radius: 999px; padding: 1px 9px; font-size: .78rem; color: var(--muted); white-space: nowrap;
-  }
-  .chapter-btn.active .c-count { background: #fff; }
-  .chapter-btn .c-review { color: var(--warn); font-size: .72rem; margin-right: 4px; }
-
-  /* ---------- Question ---------- */
-  .q-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
-  .q-meta span b { color: var(--text); font-weight: 700; }
-  .q-progress-line { font-weight: 700; color: var(--primary); }
-
-  .q-stem { font-size: 1.12rem; font-weight: 600; margin: 6px 0 18px; }
-  .q-number-badge {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--primary); color: #fff; border-radius: 8px;
-    min-width: 30px; height: 30px; padding: 0 8px; font-weight: 700; margin-left: 8px; font-size: .9rem;
-  }
-
-  .options { display: flex; flex-direction: column; gap: 10px; }
-  .option {
-    border: 1.5px solid var(--border);
-    background: var(--surface-2);
-    border-radius: 11px;
-    padding: 12px 14px;
-    cursor: pointer;
-    display: flex; gap: 12px; align-items: flex-start;
-    transition: all .12s;
-    font: inherit; text-align: right; width: 100%; color: var(--text);
-  }
-  .option:hover:not(:disabled) { border-color: var(--primary); background: #fff; }
-  .option .opt-label {
-    flex: 0 0 auto;
-    width: 28px; height: 28px; border-radius: 7px;
-    background: #fff; border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem;
-  }
-  .option .opt-text { flex: 1; }
-  .option:disabled { cursor: default; }
-  .option.selected { border-color: var(--primary); background: var(--primary-soft); }
-  .option.selected .opt-label { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .option.correct { border-color: var(--correct); background: var(--correct-soft); }
-  .option.correct .opt-label { background: var(--correct); color: #fff; border-color: var(--correct); }
-  .option.wrong { border-color: var(--wrong); background: var(--wrong-soft); }
-  .option.wrong .opt-label { background: var(--wrong); color: #fff; border-color: var(--wrong); }
-
-  /* ---------- Answer card ---------- */
-  .answer-card {
-    margin-top: 18px; border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--surface-2); overflow: hidden;
-  }
-  .answer-head {
-    padding: 12px 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
   }
-  .answer-head.ok { background: var(--correct-soft); color: var(--correct); }
-  .answer-head.review { background: var(--warn-soft); color: var(--warn); }
-  .answer-body { padding: 14px 16px; }
-  .answer-body .field-label { font-size: .82rem; color: var(--muted); font-weight: 700; margin: 12px 0 4px; }
-  .answer-body .field-label:first-child { margin-top: 0; }
-  .answer-body .expl-text { white-space: pre-wrap; }
-  .ref-box {
-    background: #fff; border: 1px solid var(--border); border-radius: 9px;
-    padding: 8px 12px; font-size: .92rem; display: inline-block;
+  .meta-pill {
+    font-size: .76rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 11px;
+    color: var(--muted);
+    white-space: nowrap;
   }
-  .badge-review {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: var(--warn-soft); color: var(--warn); border: 1px solid #fcd34d;
-    border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 700;
+  .meta-pill b { color: var(--text); font-weight: 600; }
+  .meta-pill.book { background: var(--primary-soft); border-color: #bfdbfe; color: var(--primary-dark); }
+  .meta-pill.book b { color: var(--primary-dark); }
+  .meta-pos { margin-inline-start: auto; font-size: .8rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+  .card-body { padding: 16px clamp(14px, 2.5vw, 22px); }
+  .q-number {
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin-bottom: 10px;
   }
-  .badge-ok {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: var(--correct-soft); color: var(--correct); border: 1px solid #86efac;
-    border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 700;
+  .stem {
+    font-size: clamp(1rem, 2.6vw, 1.1rem);
+    font-weight: 600;
+    margin: 0 0 16px;
+    line-height: 2;
   }
 
-  /* ---------- Navigation ---------- */
-  .nav-row {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    width: 100%;
+    text-align: start;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: .96rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color .12s, background .12s, box-shadow .12s;
   }
-  .btn {
-    border: 1px solid var(--border); background: var(--surface); color: var(--text);
-    border-radius: 9px; padding: 9px 16px; cursor: pointer; font: inherit; font-weight: 600;
-    transition: all .12s;
+  .opt:hover:not(:disabled) { border-color: var(--primary); background: #fff; }
+  .opt-key {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    display: grid; place-items: center;
+    font-size: .82rem; font-weight: 700; color: var(--muted);
   }
-  .btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
-  .btn:disabled { opacity: .45; cursor: not-allowed; }
-  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-  .btn-primary:hover:not(:disabled) { color: #fff; opacity: .92; }
-  .goto-box { display: flex; align-items: center; gap: 6px; margin: 0 auto; }
-  .goto-box input {
-    width: 70px; border: 1px solid var(--border); border-radius: 8px; padding: 8px;
-    font: inherit; text-align: center;
+  .opt-text { flex: 1 1 auto; padding-top: 1px; }
+  .opt.correct { border-color: var(--correct-border); background: var(--correct-soft); }
+  .opt.correct .opt-key { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong { border-color: var(--wrong-border); background: var(--wrong-soft); }
+  .opt.wrong .opt-key { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+  .opt:disabled { cursor: default; }
+
+  /* ---------- Answer reveal ---------- */
+  .reveal { margin-top: 16px; display: none; }
+  .reveal.show { display: block; }
+  .answer-line {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--correct-soft);
+    border: 1px solid var(--correct-border);
+    color: var(--correct);
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-weight: 700;
+    font-size: .95rem;
+    margin-bottom: 12px;
+  }
+  .block-title {
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+    margin: 0 0 6px; letter-spacing: .2px;
+  }
+  .explanation {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 15px;
+    font-size: .95rem;
+    line-height: 2.05;
+    white-space: pre-line;
+    margin-bottom: 12px;
+  }
+  .reference {
+    font-size: .86rem;
+    color: var(--muted);
+    background: #fff;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .reference b { color: var(--text); font-weight: 600; }
+
+  /* ---------- Footer nav ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+  .nav button.nav-btn {
+    flex: 0 0 auto;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: .92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .nav button.nav-btn:hover:not(:disabled) { background: var(--primary-dark); }
+  .nav button.nav-btn:disabled { background: #cbd5e1; cursor: default; }
+  .nav .nav-jump { flex: 1 1 auto; display: flex; align-items: center; gap: 8px; justify-content: center; min-width: 150px; }
+  .nav .nav-jump label { font-size: .82rem; color: var(--muted); white-space: nowrap; }
+  .nav .nav-jump select { width: auto; min-width: 88px; flex: 0 1 auto; }
+
+  .empty, .loading {
+    padding: 50px 20px;
+    text-align: center;
+    color: var(--muted);
+  }
+  .empty svg, .loading svg { opacity: .5; margin-bottom: 10px; }
+  .error {
+    margin: 0; padding: 16px;
+    background: var(--wrong-soft);
+    border: 1px solid var(--wrong-border);
+    color: var(--wrong);
+    border-radius: var(--radius);
   }
 
-  /* ---------- Progress sidebar ---------- */
-  .progress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .progress-cell {
-    background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px;
-    padding: 8px 10px; text-align: center;
+  @media (max-width: 560px) {
+    .nav button.nav-btn { padding: 10px 14px; }
+    .nav .nav-jump { order: 3; flex-basis: 100%; }
   }
-  .progress-cell .pc-num { font-size: 1.25rem; font-weight: 700; }
-  .progress-cell .pc-lbl { font-size: .76rem; color: var(--muted); }
-  .progress-cell.correct .pc-num { color: var(--correct); }
-  .progress-cell.wrong .pc-num { color: var(--wrong); }
-  .progress-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; margin-top: 10px; }
-  .progress-bar > span { display: block; height: 100%; background: var(--primary); width: 0; transition: width .3s; }
-  .reset-link { background: none; border: none; color: var(--muted); cursor: pointer; font: inherit; font-size: .8rem; text-decoration: underline; margin-top: 8px; padding: 0; }
-
-  /* ---------- States ---------- */
-  .placeholder { text-align: center; color: var(--muted); padding: 50px 20px; }
-  .placeholder .big { font-size: 2.4rem; margin-bottom: 8px; }
-  .error-box {
-    background: var(--wrong-soft); border: 1px solid #fca5a5; color: var(--wrong);
-    border-radius: var(--radius); padding: 20px; text-align: center;
-  }
-  .hidden { display: none !important; }
-  footer.app { text-align: center; color: var(--muted); font-size: .82rem; margin: 22px 0 8px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <header class="app">
     <h1>بانک سؤالات بورد زنان و زایمان</h1>
     <p>مرور آزمونی بر اساس رفرنس و فصل</p>
-    <div class="stats-row" id="headerStats"></div>
   </header>
 
-  <div id="errorState" class="error-box hidden">
-    <h3>خطا در خواندن داده‌ها</h3>
-    <p id="errorMsg">فایل سؤالات پیدا نشد یا قابل خواندن نبود.</p>
+  <div id="root">
+    <div class="loading">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+      <div>در حال بارگذاری سؤال‌ها…</div>
+    </div>
   </div>
-
-  <div class="layout" id="appLayout">
-    <!-- Sidebar -->
-    <aside class="panel sidebar">
-      <h2>فیلترها</h2>
-
-      <div class="section-label">انتخاب رفرنس</div>
-      <div class="book-list" id="bookList"></div>
-
-      <div id="chapterSection" class="hidden">
-        <div class="section-label" id="chapterSectionLabel">انتخاب فصل</div>
-        <div class="chapter-list" id="chapterList"></div>
-      </div>
-
-      <div class="section-label">پیشرفت شما</div>
-      <div class="progress-grid">
-        <div class="progress-cell"><div class="pc-num" id="pAnswered">۰</div><div class="pc-lbl">پاسخ‌داده</div></div>
-        <div class="progress-cell"><div class="pc-num" id="pSeen">۰</div><div class="pc-lbl">مرورشده</div></div>
-        <div class="progress-cell correct"><div class="pc-num" id="pCorrect">۰</div><div class="pc-lbl">درست</div></div>
-        <div class="progress-cell wrong"><div class="pc-num" id="pWrong">۰</div><div class="pc-lbl">غلط</div></div>
-      </div>
-      <div class="progress-bar"><span id="pBar"></span></div>
-      <div style="text-align:center"><button class="reset-link" id="resetBtn">پاک‌کردن پیشرفت</button></div>
-    </aside>
-
-    <!-- Main -->
-    <main class="panel">
-      <div id="welcome" class="placeholder">
-        <div class="big">🩺</div>
-        <p>برای شروع، یک <b>رفرنس</b> و سپس یک <b>فصل</b> را از ستون کناری انتخاب کنید.</p>
-      </div>
-
-      <div id="questionView" class="hidden">
-        <div class="q-meta" id="qMeta"></div>
-        <div class="q-stem" id="qStem"></div>
-        <div class="options" id="qOptions"></div>
-        <div class="answer-card hidden" id="answerCard"></div>
-
-        <div class="nav-row">
-          <button class="btn" id="prevBtn">→ قبلی</button>
-          <div class="goto-box">
-            <span>برو به سؤال:</span>
-            <input type="number" id="gotoInput" min="1" />
-            <button class="btn" id="gotoBtn">برو</button>
-          </div>
-          <button class="btn btn-primary" id="nextBtn">بعدی ←</button>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <footer class="app">
-    بانک سؤالات بورد زنان و زایمان · داده‌ها صرفاً جهت مرور آموزشی · سؤال‌های دارای نشان «نیازمند بازبینی علمی» باید پیش از استناد بازبینی شوند.
-  </footer>
 </div>
 
 <script>
-"use strict";
 (function () {
-  var STORAGE_KEY = "gynqb-progress-v1";
+  "use strict";
 
-  var state = {
-    questions: [],
-    summary: null,
-    byBook: {},          // book_fa -> [questions]
-    currentBook: null,
-    currentChapterKey: null,
-    currentList: [],     // questions in selected chapter
-    currentIndex: 0,
-    progress: {}         // question_id -> {selected, correct|null, seen:true}
-  };
+  var PROGRESS_KEY = "gynqb-progress-v1";
+  var STATE_KEY = "gynqb-filters-v1";
+  var OPTION_KEYS = ["الف", "ب", "ج", "د"];
 
-  // ---------- DOM helpers ----------
-  function $(id) { return document.getElementById(id); }
-  function el(tag, cls, txt) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (txt != null) e.textContent = txt;
-    return e;
-  }
+  var QUESTIONS = [];
+  var SUMMARY = null;
+  var BOOKS = {};           // book_fa -> {chapters: [...]}
+  var filtered = [];
+  var current = 0;
+  var progress = loadProgress();
+  var ui = {};
 
-  // ---------- localStorage ----------
+  // ---- storage helpers ----
   function loadProgress() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      state.progress = raw ? JSON.parse(raw) : {};
-    } catch (e) { state.progress = {}; }
+    try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; }
+    catch (e) { return {}; }
   }
   function saveProgress() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress)); } catch (e) {}
+    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) {}
+  }
+  function loadFilters() {
+    try { return JSON.parse(localStorage.getItem(STATE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function saveFilters(f) {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify(f)); } catch (e) {}
   }
 
-  // ---------- Data loading (relative paths for GitHub Pages /gynqb/) ----------
-  function checkResp(r) {
-    if (!r.ok) throw new Error("HTTP " + r.status + " برای " + r.url);
+  // ---- data load ----
+  Promise.all([
+    fetch("questions.json", { cache: "no-cache" }).then(okJson),
+    fetch("summary.json", { cache: "no-cache" }).then(okJson)
+  ]).then(function (res) {
+    QUESTIONS = res[0] || [];
+    SUMMARY = res[1] || {};
+    indexBooks();
+    build();
+  }).catch(function (err) {
+    document.getElementById("root").innerHTML =
+      '<p class="error">خطا در بارگذاری داده‌ها: ' + escapeHtml(String(err && err.message || err)) + '</p>';
+  });
+
+  function okJson(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status + " برای " + r.url.split("/").pop());
     return r.json();
   }
 
-  function boot() {
-    loadProgress();
-    Promise.all([
-      fetch("./questions.json").then(checkResp),
-      fetch("./summary.json").then(checkResp)
-    ]).then(function (res) {
-      state.questions = res[0] || [];
-      state.summary = res[1] || {};
-      indexData();
-      renderHeaderStats();
-      renderBooks();
-      renderProgress();
-    }).catch(function (err) {
-      $("appLayout").classList.add("hidden");
-      $("errorState").classList.remove("hidden");
-      $("errorMsg").textContent = "فایل سؤالات پیدا نشد یا قابل خواندن نبود. (" + err.message + ")";
-    });
+  function indexBooks() {
+    var bookOrder = (SUMMARY && SUMMARY.book_order) || [];
+    (SUMMARY.books || []).forEach(function (b) { BOOKS[b.book_fa] = b; });
+    if (!bookOrder.length) bookOrder = Object.keys(BOOKS);
+    SUMMARY._order = bookOrder;
   }
 
-  function indexData() {
-    state.byBook = {};
-    state.questions.forEach(function (q) {
-      (state.byBook[q.book_fa] = state.byBook[q.book_fa] || []).push(q);
+  // ---- build full UI skeleton ----
+  function build() {
+    var root = document.getElementById("root");
+    root.innerHTML =
+      '<div class="layout">' +
+        '<aside class="filters">' +
+          '<h2>' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>' +
+            'فیلترها</h2>' +
+          field("انتخاب رفرنس", "selBook") +
+          field("انتخاب فصل / موضوع", "selChapter") +
+          field("نمایش", "selAnswered") +
+          field("انتخاب شماره سؤال", "selNumber") +
+          '<button class="reset-btn" id="btnReset">حذف فیلترها</button>' +
+        '</aside>' +
+        '<main id="cardHost"></main>' +
+      '</div>';
+
+    ui.selBook = document.getElementById("selBook");
+    ui.selChapter = document.getElementById("selChapter");
+    ui.selAnswered = document.getElementById("selAnswered");
+    ui.selNumber = document.getElementById("selNumber");
+    ui.cardHost = document.getElementById("cardHost");
+
+    // reference dropdown
+    var optsBook = '<option value="">همه رفرنس‌ها</option>';
+    SUMMARY._order.forEach(function (bf) {
+      if (!BOOKS[bf]) return;
+      optsBook += '<option value="' + escapeAttr(bf) + '">' + escapeHtml(bf) + '</option>';
     });
+    ui.selBook.innerHTML = optsBook;
+
+    ui.selAnswered.innerHTML =
+      '<option value="all">همه سؤال‌ها</option>' +
+      '<option value="unseen">فقط پاسخ‌داده‌نشده‌ها</option>';
+
+    // restore saved filters
+    var saved = loadFilters();
+    if (saved.book && BOOKS[saved.book]) ui.selBook.value = saved.book;
+    populateChapters(saved.chapter || "");
+    if (saved.answered) ui.selAnswered.value = saved.answered;
+
+    ui.selBook.addEventListener("change", function () { populateChapters(""); applyFilters(true); });
+    ui.selChapter.addEventListener("change", function () { applyFilters(true); });
+    ui.selAnswered.addEventListener("change", function () { applyFilters(true); });
+    ui.selNumber.addEventListener("change", function () {
+      var i = parseInt(ui.selNumber.value, 10);
+      if (!isNaN(i)) { current = i; renderCard(); }
+    });
+    document.getElementById("btnReset").addEventListener("click", function () {
+      ui.selBook.value = ""; populateChapters(""); ui.selAnswered.value = "all";
+      applyFilters(true);
+    });
+
+    applyFilters(false);
   }
 
-  // ---------- Header stats ----------
-  function renderHeaderStats() {
-    var s = state.summary || {};
-    var box = $("headerStats");
-    box.innerHTML = "";
-    var chips = [
-      ["کل سؤال‌ها", s.total || state.questions.length],
-      ["رفرنس‌ها", s.total_books || Object.keys(state.byBook).length],
-      ["فصل‌ها / موضوعات", s.total_chapters || ""],
-      ["نیازمند بازبینی", s.review_count || 0]
-    ];
-    chips.forEach(function (c) {
-      var chip = el("div", "stat-chip");
-      chip.innerHTML = c[0] + ": <b>" + faNum(c[1]) + "</b>";
-      box.appendChild(chip);
-    });
+  function field(label, id) {
+    return '<div class="field"><label for="' + id + '">' + escapeHtml(label) +
+           '</label><select id="' + id + '"></select></div>';
   }
 
-  // ---------- Books ----------
-  function renderBooks() {
-    var list = $("bookList");
-    list.innerHTML = "";
-    var books = (state.summary && state.summary.books) ? state.summary.books : [];
-    if (!books.length) {
-      books = Object.keys(state.byBook).map(function (b) {
-        return { book_fa: b, count: state.byBook[b].length };
+  function populateChapters(selectedKey) {
+    var bf = ui.selBook.value;
+    var html = '<option value="">همه فصل‌ها / موضوعات</option>';
+    if (bf && BOOKS[bf]) {
+      BOOKS[bf].chapters.forEach(function (c) {
+        html += '<option value="' + escapeAttr(c.chapter_key) + '">' +
+                escapeHtml(c.chapter_label) + '</option>';
       });
     }
-    books.forEach(function (b) {
-      if (!b.count) return;
-      var btn = el("button", "book-btn");
-      btn.innerHTML = '<span class="b-name">' + escapeHtml(b.book_fa) + '</span>' +
-        '<span class="b-count">' + faNum(b.count) + " سؤال</span>";
-      btn.onclick = function () { selectBook(b.book_fa); };
-      btn.setAttribute("data-book", b.book_fa);
-      list.appendChild(btn);
-    });
+    ui.selChapter.innerHTML = html;
+    ui.selChapter.disabled = !bf;
+    if (selectedKey) ui.selChapter.value = selectedKey;
   }
 
-  function selectBook(bookFa) {
-    state.currentBook = bookFa;
-    state.currentChapterKey = null;
-    Array.prototype.forEach.call(document.querySelectorAll(".book-btn"), function (b) {
-      b.classList.toggle("active", b.getAttribute("data-book") === bookFa);
+  // ---- filtering ----
+  function applyFilters(resetIndex) {
+    var bf = ui.selBook.value;
+    var ck = ui.selChapter.value;
+    var ans = ui.selAnswered.value;
+
+    filtered = QUESTIONS.filter(function (q) {
+      if (bf && q.book_fa !== bf) return false;
+      if (ck && q.chapter_key !== ck) return false;
+      if (ans === "unseen" && progress[q.question_id]) return false;
+      return true;
     });
-    var isTopic = bookFa === "آپتودیت";
-    $("chapterSectionLabel").textContent = isTopic ? "انتخاب موضوع" : "انتخاب فصل";
-    renderChapters(bookFa);
-    $("chapterSection").classList.remove("hidden");
+
+    saveFilters({ book: bf, chapter: ck, answered: ans });
+
+    var numHtml = "";
+    filtered.forEach(function (q, i) {
+      numHtml += '<option value="' + i + '">سؤال ' + toFa(q.question_number) + '</option>';
+    });
+    ui.selNumber.innerHTML = numHtml || '<option value="">—</option>';
+    ui.selNumber.disabled = !filtered.length;
+
+    if (resetIndex || current >= filtered.length) current = 0;
+    renderCard();
   }
 
-  function getChaptersForBook(bookFa) {
-    var books = (state.summary && state.summary.books) ? state.summary.books : [];
-    for (var i = 0; i < books.length; i++) {
-      if (books[i].book_fa === bookFa) return books[i].chapters || [];
+  // ---- render question card ----
+  function renderCard() {
+    if (!filtered.length) {
+      ui.cardHost.innerHTML =
+        '<div class="card"><div class="empty">' +
+        '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+        '<div>سؤالی با این فیلترها یافت نشد.</div></div></div>';
+      return;
     }
-    // fallback: build from questions
-    var seen = {}, out = [];
-    (state.byBook[bookFa] || []).forEach(function (q) {
-      if (!seen[q.chapter_key]) {
-        seen[q.chapter_key] = { chapter_key: q.chapter_key, chapter_label: q.chapter_label, count: 0, review_count: 0, is_topic: q.is_topic };
-        out.push(seen[q.chapter_key]);
+    if (current < 0) current = 0;
+    if (current >= filtered.length) current = filtered.length - 1;
+
+    ui.selNumber.value = String(current);
+
+    var q = filtered[current];
+    var saved = progress[q.question_id];
+    var answered = !!saved;
+
+    var meta =
+      '<div class="card-meta">' +
+        '<span class="meta-pill book"><b>' + escapeHtml(q.book_fa) + '</b></span>' +
+        '<span class="meta-pill">' + escapeHtml(q.chapter_label) + '</span>' +
+        (q.exam_type ? '<span class="meta-pill">نوع آزمون: <b>' + escapeHtml(q.exam_type) + '</b></span>' : '') +
+        (q.exam_region ? '<span class="meta-pill">' + escapeHtml(q.exam_region) + '</span>' : '') +
+        '<span class="meta-pill">سال: <b>' + escapeHtml(q.year || "۱۴۰۳") + '</b></span>' +
+        '<span class="meta-pos">سؤال ' + toFa(current + 1) + ' از ' + toFa(filtered.length) + '</span>' +
+      '</div>';
+
+    var optsHtml = "";
+    OPTION_KEYS.forEach(function (k) {
+      var txt = (q.options && q.options[k]) || "";
+      if (!txt) return;
+      var cls = "opt";
+      if (answered) {
+        if (q.answer && k === q.answer) cls += " correct";
+        else if (saved.selected === k) cls += " wrong";
       }
-      seen[q.chapter_key].count++;
-      if (q.review_needed) seen[q.chapter_key].review_count++;
-    });
-    return out;
-  }
-
-  function renderChapters(bookFa) {
-    var list = $("chapterList");
-    list.innerHTML = "";
-    var chapters = getChaptersForBook(bookFa);
-    chapters.forEach(function (c) {
-      var btn = el("button", "chapter-btn");
-      var title = c.chapter_label || c.chapter_title || "";
-      var t = el("span", "c-title", title);
-      var cnt = el("span", "c-count", faNum(c.count) + " سؤال");
-      btn.appendChild(t);
-      btn.appendChild(cnt);
-      btn.setAttribute("data-chk", c.chapter_key);
-      btn.onclick = function () { selectChapter(bookFa, c.chapter_key); };
-      list.appendChild(btn);
-    });
-  }
-
-  function selectChapter(bookFa, chapterKey) {
-    state.currentChapterKey = chapterKey;
-    Array.prototype.forEach.call(document.querySelectorAll(".chapter-btn"), function (b) {
-      b.classList.toggle("active", b.getAttribute("data-chk") === chapterKey);
-    });
-    state.currentList = (state.byBook[bookFa] || []).filter(function (q) {
-      return q.chapter_key === chapterKey;
-    });
-    state.currentIndex = 0;
-    $("welcome").classList.add("hidden");
-    $("questionView").classList.remove("hidden");
-    $("gotoInput").max = state.currentList.length;
-    renderQuestion();
-  }
-
-  // ---------- Question rendering ----------
-  function renderQuestion() {
-    var list = state.currentList;
-    if (!list.length) return;
-    var q = list[state.currentIndex];
-
-    // meta
-    var meta = $("qMeta");
-    meta.innerHTML = "";
-    function m(label, val) {
-      var sp = el("span");
-      sp.innerHTML = escapeHtml(label) + ": <b>" + escapeHtml(val) + "</b>";
-      meta.appendChild(sp);
-    }
-    m("نام کتاب", q.book_fa);
-    m(q.is_topic ? "موضوع" : "فصل", (q.chapter_label || "").replace(/^فصل\s*/, "").replace(/^موضوع:\s*/, ""));
-    m("نوع آزمون", q.exam_type || "نامشخص");
-    m("سال", q.year || "۱۴۰۳");
-    var prog = el("span", "q-progress-line");
-    prog.textContent = "سؤال " + faNum(state.currentIndex + 1) + " از " + faNum(list.length);
-    meta.appendChild(prog);
-
-    // stem
-    $("qStem").innerHTML = '<span class="q-number-badge">' + faNum(state.currentIndex + 1) + "</span>" +
-      escapeHtml(q.stem);
-
-    // options
-    var opts = $("qOptions");
-    opts.innerHTML = "";
-    var saved = state.progress[q.question_id];
-    var labels = ["الف", "ب", "ج", "د"];
-    labels.forEach(function (lab) {
-      var text = (q.options && q.options[lab]) ? q.options[lab] : "";
-      if (!text) return;
-      var btn = el("button", "option");
-      btn.appendChild(el("span", "opt-label", lab));
-      btn.appendChild(el("span", "opt-text", text));
-      btn.setAttribute("data-opt", lab);
-      btn.onclick = function () { chooseOption(q, lab); };
-      opts.appendChild(btn);
+      optsHtml +=
+        '<button class="' + cls + '" data-key="' + escapeAttr(k) + '"' + (answered ? ' disabled' : '') + '>' +
+          '<span class="opt-key">' + escapeHtml(k) + '</span>' +
+          '<span class="opt-text">' + escapeHtml(txt) + '</span>' +
+        '</button>';
     });
 
-    if (saved) {
-      applyAnswerState(q, saved.selected);
-    } else {
-      $("answerCard").classList.add("hidden");
+    var reveal = "";
+    if (answered) {
+      var ansLine = q.answer
+        ? '<div class="answer-line">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+            'پاسخ صحیح: گزینه ' + escapeHtml(q.answer) + '</div>'
+        : '';
+      var expl = q.explanation
+        ? '<p class="block-title">توضیح</p><div class="explanation">' + escapeHtml(q.explanation) + '</div>'
+        : '';
+      var ref = q.reference_text
+        ? '<p class="block-title">رفرنس</p><div class="reference"><b>' + escapeHtml(q.reference_text) + '</b></div>'
+        : '';
+      reveal = '<div class="reveal show">' + ansLine + expl + ref + '</div>';
     }
 
-    // nav
-    $("prevBtn").disabled = state.currentIndex === 0;
-    $("nextBtn").disabled = state.currentIndex === list.length - 1;
-    $("gotoInput").value = state.currentIndex + 1;
-  }
+    ui.cardHost.innerHTML =
+      '<div class="card">' +
+        meta +
+        '<div class="card-body">' +
+          '<span class="q-number">سؤال شماره ' + toFa(q.question_number) + '</span>' +
+          '<p class="stem">' + escapeHtml(q.stem) + '</p>' +
+          '<div class="options">' + optsHtml + '</div>' +
+          reveal +
+        '</div>' +
+        navHtml() +
+      '</div>';
 
-  function chooseOption(q, lab) {
-    if (state.progress[q.question_id]) return; // already answered
-    var correct = q.answer ? (lab === q.answer) : null;
-    state.progress[q.question_id] = { selected: lab, correct: correct, seen: true };
-    saveProgress();
-    applyAnswerState(q, lab);
-    renderProgress();
-  }
-
-  function applyAnswerState(q, selected) {
-    var hasAnswer = !!q.answer;
-    Array.prototype.forEach.call(document.querySelectorAll("#qOptions .option"), function (btn) {
-      var lab = btn.getAttribute("data-opt");
-      btn.disabled = true;
-      if (hasAnswer && lab === q.answer) btn.classList.add("correct");
-      if (lab === selected) {
-        if (!hasAnswer) btn.classList.add("selected");
-        else if (lab !== q.answer) btn.classList.add("wrong");
-      }
+    Array.prototype.forEach.call(ui.cardHost.querySelectorAll(".opt"), function (btn) {
+      btn.addEventListener("click", function () {
+        if (progress[q.question_id]) return;
+        var k = btn.getAttribute("data-key");
+        progress[q.question_id] = { selected: k, correct: q.answer ? (k === q.answer) : null };
+        saveProgress();
+        renderCard();
+      });
     });
-    renderAnswerCard(q);
+    wireNav();
   }
 
-  function renderAnswerCard(q) {
-    var card = $("answerCard");
-    card.classList.remove("hidden");
-    card.innerHTML = "";
+  function navHtml() {
+    var atStart = current <= 0;
+    var atEnd = current >= filtered.length - 1;
+    return '<div class="nav">' +
+      '<button class="nav-btn" id="btnPrev"' + (atStart ? ' disabled' : '') + '>قبلی</button>' +
+      '<div class="nav-jump"><label for="navNum">برو به سؤال:</label><select id="navNum"></select></div>' +
+      '<button class="nav-btn" id="btnNext"' + (atEnd ? ' disabled' : '') + '>بعدی</button>' +
+      '</div>';
+  }
 
-    var head = el("div", "answer-head " + (q.review_needed ? "review" : "ok"));
-    if (q.answer) {
-      head.appendChild(el("span", null, "پاسخ صحیح: گزینه " + q.answer));
-    } else {
-      head.appendChild(el("span", null, "پاسخ صحیح در دیتابیس ثبت نشده است"));
+  function wireNav() {
+    var prev = document.getElementById("btnPrev");
+    var next = document.getElementById("btnNext");
+    var navNum = document.getElementById("navNum");
+    if (prev) prev.addEventListener("click", function () { if (current > 0) { current--; renderCard(); } });
+    if (next) next.addEventListener("click", function () { if (current < filtered.length - 1) { current++; renderCard(); } });
+    if (navNum) {
+      var html = "";
+      filtered.forEach(function (q, i) {
+        html += '<option value="' + i + '"' + (i === current ? ' selected' : '') + '>' +
+                toFa(q.question_number) + '</option>';
+      });
+      navNum.innerHTML = html;
+      navNum.addEventListener("change", function () {
+        var i = parseInt(navNum.value, 10);
+        if (!isNaN(i)) { current = i; renderCard(); }
+      });
     }
-    head.appendChild(q.review_needed
-      ? badge("نیازمند بازبینی علمی", "badge-review")
-      : badge("تأییدشده", "badge-ok"));
-    card.appendChild(head);
-
-    var body = el("div", "answer-body");
-
-    body.appendChild(el("div", "field-label", "توضیح"));
-    var ex = el("div", "expl-text");
-    ex.textContent = q.explanation || "—";
-    body.appendChild(ex);
-
-    body.appendChild(el("div", "field-label", "رفرنس"));
-    body.appendChild(el("div", "ref-box", q.reference_text || (q.book_fa + " - " + (q.chapter_label || ""))));
-
-    body.appendChild(el("div", "field-label", "وضعیت علمی"));
-    body.appendChild(el("div", null, q.review_needed ? "نیازمند بازبینی علمی" : "تأییدشده"));
-
-    card.appendChild(body);
   }
 
-  function badge(text, cls) {
-    var b = el("span", cls);
-    b.textContent = text;
-    return b;
-  }
-
-  // ---------- Navigation ----------
-  function go(delta) {
-    var ni = state.currentIndex + delta;
-    if (ni < 0 || ni >= state.currentList.length) return;
-    state.currentIndex = ni;
-    renderQuestion();
-  }
-  function gotoNumber() {
-    var n = parseInt($("gotoInput").value, 10);
-    if (isNaN(n) || n < 1 || n > state.currentList.length) return;
-    state.currentIndex = n - 1;
-    renderQuestion();
-  }
-
-  // ---------- Progress ----------
-  function renderProgress() {
-    var answered = 0, correct = 0, wrong = 0, seen = 0;
-    var total = state.questions.length || 1;
-    for (var id in state.progress) {
-      if (!state.progress.hasOwnProperty(id)) continue;
-      var p = state.progress[id];
-      seen++;
-      answered++;
-      if (p.correct === true) correct++;
-      else if (p.correct === false) wrong++;
-    }
-    $("pAnswered").textContent = faNum(answered);
-    $("pSeen").textContent = faNum(seen);
-    $("pCorrect").textContent = faNum(correct);
-    $("pWrong").textContent = faNum(wrong);
-    $("pBar").style.width = Math.round((seen / total) * 100) + "%";
-  }
-
-  function resetProgress() {
-    if (!window.confirm("همه‌ی پیشرفت شما پاک شود؟")) return;
-    state.progress = {};
-    saveProgress();
-    renderProgress();
-    if (state.currentList.length) renderQuestion();
-  }
-
-  // ---------- Utils ----------
-  var FA_DIGITS = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-  function faNum(n) {
-    return String(n).replace(/[0-9]/g, function (d) { return FA_DIGITS[+d]; });
-  }
+  // ---- utils ----
   function escapeHtml(str) {
     return String(str == null ? "" : str)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
-
-  // ---------- Wire up ----------
-  document.addEventListener("DOMContentLoaded", function () {
-    $("prevBtn").onclick = function () { go(-1); };
-    $("nextBtn").onclick = function () { go(1); };
-    $("gotoBtn").onclick = gotoNumber;
-    $("gotoInput").addEventListener("keydown", function (e) { if (e.key === "Enter") gotoNumber(); });
-    $("resetBtn").onclick = resetProgress;
-    document.addEventListener("keydown", function (e) {
-      if (e.target && e.target.tagName === "INPUT") return;
-      if (e.key === "ArrowLeft") go(1);        // RTL: چپ = بعدی
-      else if (e.key === "ArrowRight") go(-1);  // RTL: راست = قبلی
-    });
-    boot();
-  });
+  function escapeAttr(str) { return escapeHtml(str); }
+  function toFa(n) {
+    return String(n).replace(/[0-9]/g, function (d) { return "۰۱۲۳۴۵۶۷۸۹"[d]; });
+  }
 })();
 </script>
 </body>
