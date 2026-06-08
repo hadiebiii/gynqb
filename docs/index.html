@@ -1,971 +1,657 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بانک سؤالات بورد زنان و زایمان</title>
-  <meta name="description" content="مرور آزمونی سؤالات بورد، ارتقا و فلوشیپ زنان و زایمان بر اساس رفرنس و فصل" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>بانک سؤالات بورد زنان و زایمان</title>
+<meta name="description" content="مرور آزمونی سؤالات بورد، ارتقا و فلوشیپ زنان و زایمان بر اساس رفرنس و فصل" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+    --primary: #2563eb;
+    --primary-soft: #dbeafe;
+    --correct: #16a34a;
+    --correct-soft: #dcfce7;
+    --wrong: #dc2626;
+    --wrong-soft: #fee2e2;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --radius: 14px;
+    --shadow: 0 1px 3px rgba(15, 23, 42, .08), 0 8px 24px rgba(15, 23, 42, .05);
+    font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--primary); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 16px; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  /* ---------- Header ---------- */
+  header.app {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  header.app h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  header.app p { margin: 0; opacity: .9; font-size: .95rem; }
+  .stats-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .stat-chip {
+    background: rgba(255, 255, 255, .15);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: .85rem;
+  }
+  .stat-chip b { font-weight: 700; }
 
-  <style>
-    :root {
-      --font-primary: 'Vazirmatn', 'IRANSans', 'Tahoma', 'Arial', sans-serif;
+  /* ---------- Layout ---------- */
+  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
 
-      --c-white: #FFFFFF;
-      --c-page: #F0F2F5;
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+  }
+  .sidebar { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+  @media (max-width: 860px) { .sidebar { position: static; max-height: none; } }
 
-      --c-text: #1A1D23;
-      --c-text-2: #4A5060;
-      --c-text-3: #8A90A0;
+  .panel h2 { font-size: 1.05rem; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .section-label { font-size: .8rem; color: var(--muted); margin: 16px 0 8px; font-weight: 700; }
 
-      --c-navy: #1B2A4A;
-      --c-navy-mid: #243659;
-      --c-blue: #2B5BA8;
-      --c-blue-light: #EBF1FB;
-      --c-blue-soft: #D5E4F7;
+  /* ---------- Book buttons ---------- */
+  .book-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .book-btn {
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 10px 8px;
+    cursor: pointer;
+    font: inherit;
+    text-align: center;
+    transition: all .15s;
+    color: var(--text);
+  }
+  .book-btn:hover { border-color: var(--primary); }
+  .book-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .book-btn .b-name { font-weight: 700; display: block; }
+  .book-btn .b-count { font-size: .78rem; opacity: .8; }
 
-      --c-green: #1A7A4A;
-      --c-green-bg: #EBF7F1;
-      --c-green-border: #A3DBBE;
+  /* ---------- Chapter list ---------- */
+  .chapter-list { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+  .chapter-btn {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 9px;
+    padding: 9px 11px;
+    cursor: pointer;
+    font: inherit;
+    text-align: right;
+    color: var(--text);
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    transition: all .12s;
+  }
+  .chapter-btn:hover { background: var(--surface-2); border-color: var(--primary); }
+  .chapter-btn.active { background: var(--primary-soft); border-color: var(--primary); font-weight: 700; }
+  .chapter-btn .c-title { flex: 1; }
+  .chapter-btn .c-count {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 1px 9px; font-size: .78rem; color: var(--muted); white-space: nowrap;
+  }
+  .chapter-btn.active .c-count { background: #fff; }
+  .chapter-btn .c-review { color: var(--warn); font-size: .72rem; margin-right: 4px; }
 
-      --c-red: #B22222;
-      --c-red-bg: #FDEDED;
-      --c-red-border: #F0AAAA;
+  /* ---------- Question ---------- */
+  .q-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
+  .q-meta span b { color: var(--text); font-weight: 700; }
+  .q-progress-line { font-weight: 700; color: var(--primary); }
 
-      --c-accent: #C8870A;
-      --c-accent-bg: #FFF8EC;
-      --c-gold: #B8960A;
+  .q-stem { font-size: 1.12rem; font-weight: 600; margin: 6px 0 18px; }
+  .q-number-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--primary); color: #fff; border-radius: 8px;
+    min-width: 30px; height: 30px; padding: 0 8px; font-weight: 700; margin-left: 8px; font-size: .9rem;
+  }
 
-      --c-border: #E2E6EC;
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 11px;
+    padding: 12px 14px;
+    cursor: pointer;
+    display: flex; gap: 12px; align-items: flex-start;
+    transition: all .12s;
+    font: inherit; text-align: right; width: 100%; color: var(--text);
+  }
+  .option:hover:not(:disabled) { border-color: var(--primary); background: #fff; }
+  .option .opt-label {
+    flex: 0 0 auto;
+    width: 28px; height: 28px; border-radius: 7px;
+    background: #fff; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem;
+  }
+  .option .opt-text { flex: 1; }
+  .option:disabled { cursor: default; }
+  .option.selected { border-color: var(--primary); background: var(--primary-soft); }
+  .option.selected .opt-label { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .option.correct { border-color: var(--correct); background: var(--correct-soft); }
+  .option.correct .opt-label { background: var(--correct); color: #fff; border-color: var(--correct); }
+  .option.wrong { border-color: var(--wrong); background: var(--wrong-soft); }
+  .option.wrong .opt-label { background: var(--wrong); color: #fff; border-color: var(--wrong); }
 
-      --radius: 8px;
-      --radius-lg: 12px;
-      --radius-xl: 16px;
-      --radius-pill: 999px;
+  /* ---------- Answer card ---------- */
+  .answer-card {
+    margin-top: 18px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface-2); overflow: hidden;
+  }
+  .answer-head {
+    padding: 12px 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .answer-head.ok { background: var(--correct-soft); color: var(--correct); }
+  .answer-head.review { background: var(--warn-soft); color: var(--warn); }
+  .answer-body { padding: 14px 16px; }
+  .answer-body .field-label { font-size: .82rem; color: var(--muted); font-weight: 700; margin: 12px 0 4px; }
+  .answer-body .field-label:first-child { margin-top: 0; }
+  .answer-body .expl-text { white-space: pre-wrap; }
+  .ref-box {
+    background: #fff; border: 1px solid var(--border); border-radius: 9px;
+    padding: 8px 12px; font-size: .92rem; display: inline-block;
+  }
+  .badge-review {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--warn-soft); color: var(--warn); border: 1px solid #fcd34d;
+    border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 700;
+  }
+  .badge-ok {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--correct-soft); color: var(--correct); border: 1px solid #86efac;
+    border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 700;
+  }
 
-      --shadow-sm: 0 1px 3px rgba(27,42,74,0.06), 0 1px 2px rgba(27,42,74,0.04);
-      --shadow-card: 0 2px 12px rgba(27,42,74,0.09), 0 1px 3px rgba(27,42,74,0.06);
-      --shadow-hover: 0 4px 20px rgba(27,42,74,0.13), 0 2px 6px rgba(27,42,74,0.08);
+  /* ---------- Navigation ---------- */
+  .nav-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .btn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    border-radius: 9px; padding: 9px 16px; cursor: pointer; font: inherit; font-weight: 600;
+    transition: all .12s;
+  }
+  .btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover:not(:disabled) { color: #fff; opacity: .92; }
+  .goto-box { display: flex; align-items: center; gap: 6px; margin: 0 auto; }
+  .goto-box input {
+    width: 70px; border: 1px solid var(--border); border-radius: 8px; padding: 8px;
+    font: inherit; text-align: center;
+  }
 
-      --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-      --dur-fast: 150ms;
-      --dur-normal: 220ms;
-      --dur-slow: 350ms;
+  /* ---------- Progress sidebar ---------- */
+  .progress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .progress-cell {
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px;
+    padding: 8px 10px; text-align: center;
+  }
+  .progress-cell .pc-num { font-size: 1.25rem; font-weight: 700; }
+  .progress-cell .pc-lbl { font-size: .76rem; color: var(--muted); }
+  .progress-cell.correct .pc-num { color: var(--correct); }
+  .progress-cell.wrong .pc-num { color: var(--wrong); }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+  .progress-bar > span { display: block; height: 100%; background: var(--primary); width: 0; transition: width .3s; }
+  .reset-link { background: none; border: none; color: var(--muted); cursor: pointer; font: inherit; font-size: .8rem; text-decoration: underline; margin-top: 8px; padding: 0; }
 
-      --text-xs: 10px;
-      --text-sm: 11px;
-      --text-base: 12px;
-      --text-md: 13px;
-      --text-body: 14px;
-      --text-stem: 14.5px;
-      --text-h3: 16px;
-      --text-h2: 18px;
-      --text-h1: 22px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { height: 100%; }
-
-    body {
-      font-family: var(--font-primary);
-      direction: rtl;
-      background: var(--c-page);
-      color: var(--c-text);
-      font-size: var(--text-body);
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.7;
-    }
-
-    .q-body { line-height: 1.85; }
-    .q-stem { line-height: 1.75; }
-    .opt-text { line-height: 1.65; }
-    .explain-text { line-height: 1.82; }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ---------- Layout ---------- */
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px 64px; }
-
-    /* ---------- Header ---------- */
-    header.site-header {
-      background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-mid) 100%);
-      color: var(--c-white);
-      padding: 22px 16px;
-      box-shadow: var(--shadow-card);
-    }
-    .header-inner { max-width: 920px; margin: 0 auto; }
-    .site-title {
-      font-size: var(--text-h1);
-      font-weight: 800;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .site-title i { color: var(--c-blue-soft); font-size: 26px; }
-    .site-sub { font-size: var(--text-md); color: var(--c-blue-soft); margin-top: 4px; font-weight: 400; }
-
-    .stats-row {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px;
-    }
-    .stat-pill {
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: var(--radius-pill);
-      padding: 6px 14px;
-      font-size: var(--text-base);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .stat-pill b { font-size: var(--text-md); font-weight: 700; }
-    .stat-pill i { font-size: 15px; opacity: .85; }
-
-    /* ---------- Breadcrumb ---------- */
-    .crumbs {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-      margin: 18px 0 6px; font-size: var(--text-base); color: var(--c-text-2);
-    }
-    .crumb-btn {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius-pill); padding: 5px 12px; cursor: pointer;
-      font-family: inherit; font-size: var(--text-base); color: var(--c-blue);
-      display: inline-flex; align-items: center; gap: 5px;
-      transition: background var(--dur-fast) var(--ease-standard);
-    }
-    .crumb-btn:hover { background: var(--c-blue-light); }
-    .crumbs .sep { color: var(--c-text-3); }
-
-    /* ---------- Section titles ---------- */
-    .section-title {
-      font-size: var(--text-h2); font-weight: 700; margin: 18px 0 14px;
-      display: flex; align-items: center; gap: 8px; color: var(--c-navy);
-    }
-    .section-title i { color: var(--c-blue); }
-
-    .group-label {
-      font-size: var(--text-md); font-weight: 600; color: var(--c-text-2);
-      margin: 22px 0 10px; padding-right: 4px;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .group-label.complementary { color: var(--c-text-3); }
-
-    /* ---------- Book cards ---------- */
-    .book-grid {
-      display: grid; gap: 14px;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-    .book-card {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg); padding: 18px;
-      cursor: pointer; box-shadow: var(--shadow-sm);
-      transition: transform var(--dur-normal) var(--ease-standard),
-                  box-shadow var(--dur-normal) var(--ease-standard),
-                  border-color var(--dur-normal) var(--ease-standard);
-      animation: fadeUp var(--dur-slow) var(--ease-standard) both;
-      position: relative; overflow: hidden;
-    }
-    .book-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--c-blue-soft); }
-    .book-card .bc-icon {
-      width: 44px; height: 44px; border-radius: var(--radius);
-      background: var(--c-blue-light); color: var(--c-blue);
-      display: flex; align-items: center; justify-content: center; font-size: 24px;
-      margin-bottom: 12px;
-    }
-    .book-card.primary { border-top: 3px solid var(--c-blue); }
-    .book-card.complementary .bc-icon { background: var(--c-accent-bg); color: var(--c-accent); }
-    .book-card .bc-name { font-size: var(--text-h3); font-weight: 700; }
-    .book-card .bc-meta { font-size: var(--text-base); color: var(--c-text-2); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .book-card .bc-meta span { display: inline-flex; align-items: center; gap: 4px; }
-    .badge-primary {
-      position: absolute; top: 12px; left: 12px;
-      font-size: var(--text-xs); background: var(--c-blue); color: #fff;
-      padding: 2px 8px; border-radius: var(--radius-pill); font-weight: 600;
-    }
-
-    /* ---------- Chapter list ---------- */
-    .search-box {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius); padding: 10px 12px; margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-    }
-    .search-box i { color: var(--c-text-3); font-size: 18px; }
-    .search-box input {
-      border: none; outline: none; flex: 1; font-family: inherit;
-      font-size: var(--text-body); background: transparent; color: var(--c-text);
-    }
-    .chapter-list { display: flex; flex-direction: column; gap: 8px; }
-    .chapter-item {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius); padding: 12px 14px; cursor: pointer;
-      display: flex; align-items: center; gap: 12px;
-      transition: background var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
-      animation: fadeUp var(--dur-normal) var(--ease-standard) both;
-    }
-    .chapter-item:hover { background: var(--c-blue-light); border-color: var(--c-blue-soft); }
-    .chapter-num {
-      flex-shrink: 0; min-width: 40px; height: 40px; padding: 0 8px;
-      border-radius: var(--radius); background: var(--c-navy); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: var(--text-md);
-    }
-    .chapter-main { flex: 1; min-width: 0; }
-    .chapter-title-txt { font-weight: 600; font-size: var(--text-md); }
-    .chapter-sub { font-size: var(--text-base); color: var(--c-text-2); margin-top: 2px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .chapter-sub .review-mini { color: var(--c-accent); }
-    .chapter-item .ti-chevron-left { color: var(--c-text-3); font-size: 18px; }
-    .empty-note { color: var(--c-text-3); text-align: center; padding: 30px; font-size: var(--text-md); }
-
-    /* ---------- Question view ---------- */
-    .q-meta-card {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg); padding: 14px 16px; box-shadow: var(--shadow-sm);
-      margin-bottom: 14px;
-    }
-    .q-meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 18px; }
-    .q-meta-item { font-size: var(--text-base); }
-    .q-meta-item .lbl { color: var(--c-text-3); display: flex; align-items: center; gap: 5px; }
-    .q-meta-item .val { color: var(--c-text); font-weight: 600; font-size: var(--text-md); margin-top: 2px; }
-
-    .progress-card {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg); padding: 14px 16px; box-shadow: var(--shadow-sm);
-      margin-bottom: 14px;
-    }
-    .progress-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .progress-head .ptitle { font-size: var(--text-md); font-weight: 600; color: var(--c-navy); }
-    .progress-stats { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pstat { font-size: var(--text-base); padding: 4px 10px; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 4px; }
-    .pstat.done { background: var(--c-blue-light); color: var(--c-blue); }
-    .pstat.correct { background: var(--c-green-bg); color: var(--c-green); }
-    .pstat.wrong { background: var(--c-red-bg); color: var(--c-red); }
-    .bar { height: 8px; background: var(--c-page); border-radius: var(--radius-pill); margin-top: 12px; overflow: hidden; }
-    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--c-blue), var(--c-green)); border-radius: var(--radius-pill); transition: width var(--dur-slow) var(--ease-standard); }
-    .reset-btn {
-      background: transparent; border: 1px solid var(--c-red-border); color: var(--c-red);
-      border-radius: var(--radius); padding: 5px 10px; font-family: inherit;
-      font-size: var(--text-base); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
-      transition: background var(--dur-fast) var(--ease-standard);
-    }
-    .reset-btn:hover { background: var(--c-red-bg); }
-
-    .q-card {
-      background: var(--c-white); border: 1px solid var(--c-border);
-      border-radius: var(--radius-xl); padding: 20px; box-shadow: var(--shadow-card);
-      animation: fadeUp var(--dur-normal) var(--ease-standard) both;
-    }
-    .q-topline { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-    .q-number-badge {
-      font-size: var(--text-base); font-weight: 700; color: var(--c-blue);
-      background: var(--c-blue-light); padding: 4px 12px; border-radius: var(--radius-pill);
-    }
-    .review-badge {
-      font-size: var(--text-xs); font-weight: 600; color: var(--c-accent);
-      background: var(--c-accent-bg); border: 1px solid #F0D9A6;
-      padding: 3px 10px; border-radius: var(--radius-pill);
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .q-stem { font-size: var(--text-stem); font-weight: 500; color: var(--c-text); margin-bottom: 18px; }
-
-    .opt-list { display: flex; flex-direction: column; gap: 10px; }
-    .opt {
-      display: flex; align-items: flex-start; gap: 12px;
-      background: var(--c-white); border: 1.5px solid var(--c-border);
-      border-radius: var(--radius); padding: 12px 14px; cursor: pointer; text-align: right;
-      width: 100%; font-family: inherit;
-      transition: border-color var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
-    }
-    .opt:hover:not(.locked) { border-color: var(--c-blue); background: var(--c-blue-light); }
-    .opt .opt-key {
-      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
-      background: var(--c-page); color: var(--c-text-2); font-weight: 700;
-      display: flex; align-items: center; justify-content: center; font-size: var(--text-base);
-    }
-    .opt .opt-text { flex: 1; font-size: var(--text-body); color: var(--c-text); padding-top: 2px; }
-    .opt .opt-mark { flex-shrink: 0; font-size: 20px; opacity: 0; }
-    .opt.locked { cursor: default; }
-    .opt.disabled { opacity: .65; }
-
-    .opt.correct { border-color: var(--c-green-border); background: var(--c-green-bg); animation: opt-correct var(--dur-slow) var(--ease-standard); }
-    .opt.correct .opt-key { background: var(--c-green); color: #fff; }
-    .opt.correct .opt-mark { opacity: 1; color: var(--c-green); }
-    .opt.wrong { border-color: var(--c-red-border); background: var(--c-red-bg); animation: opt-shake var(--dur-slow) var(--ease-standard); }
-    .opt.wrong .opt-key { background: var(--c-red); color: #fff; }
-    .opt.wrong .opt-mark { opacity: 1; color: var(--c-red); }
-    .opt.empty-opt { color: var(--c-text-3); font-style: italic; cursor: default; }
-
-    /* ---------- Answer panel ---------- */
-    .answer-panel { margin-top: 18px; border-top: 1px dashed var(--c-border); padding-top: 16px; animation: fadeUp var(--dur-normal) var(--ease-standard) both; }
-    .verdict { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: var(--text-md); margin-bottom: 12px; padding: 10px 12px; border-radius: var(--radius); }
-    .verdict.good { background: var(--c-green-bg); color: var(--c-green); border: 1px solid var(--c-green-border); }
-    .verdict.bad { background: var(--c-red-bg); color: var(--c-red); border: 1px solid var(--c-red-border); }
-    .verdict.neutral { background: var(--c-blue-light); color: var(--c-blue); border: 1px solid var(--c-blue-soft); }
-    .ans-block { margin-bottom: 12px; }
-    .ans-block .ans-h { font-size: var(--text-base); color: var(--c-text-3); font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
-    .ans-block .ans-correct { font-weight: 700; color: var(--c-green); font-size: var(--text-md); }
-    .explain-text { font-size: var(--text-body); color: var(--c-text-2); white-space: pre-wrap; }
-    .citation-text { font-size: var(--text-base); color: var(--c-text-2); background: var(--c-page); border-radius: var(--radius); padding: 10px 12px; }
-
-    /* ---------- Nav ---------- */
-    .nav-bar {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      margin-top: 16px; flex-wrap: wrap;
-    }
-    .nav-btn {
-      background: var(--c-white); border: 1px solid var(--c-border); color: var(--c-navy);
-      border-radius: var(--radius); padding: 9px 16px; cursor: pointer; font-family: inherit;
-      font-size: var(--text-md); font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
-      transition: background var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
-    }
-    .nav-btn:hover:not(:disabled) { background: var(--c-blue-light); border-color: var(--c-blue-soft); }
-    .nav-btn:disabled { opacity: .45; cursor: not-allowed; }
-    .nav-btn.primary { background: var(--c-blue); color: #fff; border-color: var(--c-blue); }
-    .nav-btn.primary:hover:not(:disabled) { background: var(--c-navy-mid); }
-    .jump-box { display: flex; align-items: center; gap: 6px; font-size: var(--text-base); color: var(--c-text-2); }
-    .jump-box input {
-      width: 64px; text-align: center; font-family: inherit; font-size: var(--text-md);
-      border: 1px solid var(--c-border); border-radius: var(--radius); padding: 7px 6px; outline: none;
-    }
-    .jump-box input:focus { border-color: var(--c-blue); }
-    .counter-line { text-align: center; font-size: var(--text-base); color: var(--c-text-2); margin-top: 12px; }
-    .jump-error { color: var(--c-red); font-size: var(--text-base); text-align: center; margin-top: 8px; min-height: 18px; }
-
-    /* ---------- States ---------- */
-    .state-box { text-align: center; padding: 60px 20px; color: var(--c-text-2); }
-    .state-box i { font-size: 48px; color: var(--c-text-3); display: block; margin-bottom: 14px; }
-    .state-box.error i { color: var(--c-red); }
-    .state-box .st-title { font-size: var(--text-h3); font-weight: 700; color: var(--c-text); margin-bottom: 6px; }
-    .spinner {
-      width: 38px; height: 38px; border: 4px solid var(--c-blue-light);
-      border-top-color: var(--c-blue); border-radius: 50%; margin: 0 auto 16px;
-      animation: spin 0.8s linear infinite;
-    }
-    .retry-btn {
-      margin-top: 16px; background: var(--c-blue); color: #fff; border: none;
-      border-radius: var(--radius); padding: 9px 18px; cursor: pointer; font-family: inherit;
-      font-size: var(--text-md); font-weight: 600;
-    }
-
-    .hidden { display: none !important; }
-
-    /* ---------- Animations ---------- */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes opt-correct { 0% { transform: scale(0.98); } 60% { transform: scale(1.015); } 100% { transform: scale(1); } }
-    @keyframes opt-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 600px) {
-      .site-title { font-size: var(--text-h2); }
-      .q-card { padding: 16px; }
-      .nav-bar { flex-direction: column; align-items: stretch; }
-      .jump-box { justify-content: center; }
-      .nav-btn { justify-content: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
-  </style>
+  /* ---------- States ---------- */
+  .placeholder { text-align: center; color: var(--muted); padding: 50px 20px; }
+  .placeholder .big { font-size: 2.4rem; margin-bottom: 8px; }
+  .error-box {
+    background: var(--wrong-soft); border: 1px solid #fca5a5; color: var(--wrong);
+    border-radius: var(--radius); padding: 20px; text-align: center;
+  }
+  .hidden { display: none !important; }
+  footer.app { text-align: center; color: var(--muted); font-size: .82rem; margin: 22px 0 8px; }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="site-title"><i class="ti ti-stethoscope"></i><span>بانک سؤالات بورد زنان و زایمان</span></div>
-      <div class="site-sub">مرور آزمونی بر اساس رفرنس و فصل</div>
-      <div class="stats-row" id="headerStats"></div>
-    </div>
+<div class="wrap">
+
+  <header class="app">
+    <h1>بانک سؤالات بورد زنان و زایمان</h1>
+    <p>مرور آزمونی بر اساس رفرنس و فصل</p>
+    <div class="stats-row" id="headerStats"></div>
   </header>
 
-  <main class="wrap">
-    <nav class="crumbs hidden" id="crumbs"></nav>
+  <div id="errorState" class="error-box hidden">
+    <h3>خطا در خواندن داده‌ها</h3>
+    <p id="errorMsg">فایل سؤالات پیدا نشد یا قابل خواندن نبود.</p>
+  </div>
 
-    <!-- Loading -->
-    <div id="viewLoading" class="state-box">
-      <div class="spinner"></div>
-      <div class="st-title">در حال بارگذاری داده‌ها…</div>
-      <div>لطفاً چند لحظه صبر کنید.</div>
-    </div>
+  <div class="layout" id="appLayout">
+    <!-- Sidebar -->
+    <aside class="panel sidebar">
+      <h2>فیلترها</h2>
 
-    <!-- Error -->
-    <div id="viewError" class="state-box error hidden">
-      <i class="ti ti-alert-triangle"></i>
-      <div class="st-title">خطا در خواندن داده‌ها</div>
-      <div id="errorMsg">فایل سؤالات پیدا نشد یا قابل خواندن نبود.</div>
-      <button class="retry-btn" id="retryBtn"><i class="ti ti-refresh"></i> تلاش مجدد</button>
-    </div>
+      <div class="section-label">انتخاب رفرنس</div>
+      <div class="book-list" id="bookList"></div>
 
-    <!-- Books -->
-    <section id="viewBooks" class="hidden">
-      <h2 class="section-title"><i class="ti ti-books"></i> انتخاب رفرنس</h2>
-      <div id="primaryBooks" class="book-grid"></div>
-      <div class="group-label complementary"><i class="ti ti-layers-subtract"></i> رفرنس‌های تکمیلی</div>
-      <div id="complementaryBooks" class="book-grid"></div>
-    </section>
-
-    <!-- Chapters -->
-    <section id="viewChapters" class="hidden">
-      <h2 class="section-title"><i class="ti ti-list-details"></i> انتخاب فصل — <span id="chaptersBookName"></span></h2>
-      <div class="search-box">
-        <i class="ti ti-search"></i>
-        <input type="text" id="chapterSearch" placeholder="جستجو در عنوان فصل‌ها…" autocomplete="off" />
-      </div>
-      <div id="chapterList" class="chapter-list"></div>
-    </section>
-
-    <!-- Question -->
-    <section id="viewQuestion" class="hidden">
-      <div class="q-meta-card">
-        <div class="q-meta-grid" id="qMetaGrid"></div>
+      <div id="chapterSection" class="hidden">
+        <div class="section-label" id="chapterSectionLabel">انتخاب فصل</div>
+        <div class="chapter-list" id="chapterList"></div>
       </div>
 
-      <div class="progress-card">
-        <div class="progress-head">
-          <span class="ptitle"><i class="ti ti-chart-bar"></i> پیشرفت این فصل</span>
-          <button class="reset-btn" id="resetBtn"><i class="ti ti-trash"></i> پاک کردن پیشرفت این فصل</button>
+      <div class="section-label">پیشرفت شما</div>
+      <div class="progress-grid">
+        <div class="progress-cell"><div class="pc-num" id="pAnswered">۰</div><div class="pc-lbl">پاسخ‌داده</div></div>
+        <div class="progress-cell"><div class="pc-num" id="pSeen">۰</div><div class="pc-lbl">مرورشده</div></div>
+        <div class="progress-cell correct"><div class="pc-num" id="pCorrect">۰</div><div class="pc-lbl">درست</div></div>
+        <div class="progress-cell wrong"><div class="pc-num" id="pWrong">۰</div><div class="pc-lbl">غلط</div></div>
+      </div>
+      <div class="progress-bar"><span id="pBar"></span></div>
+      <div style="text-align:center"><button class="reset-link" id="resetBtn">پاک‌کردن پیشرفت</button></div>
+    </aside>
+
+    <!-- Main -->
+    <main class="panel">
+      <div id="welcome" class="placeholder">
+        <div class="big">🩺</div>
+        <p>برای شروع، یک <b>رفرنس</b> و سپس یک <b>فصل</b> را از ستون کناری انتخاب کنید.</p>
+      </div>
+
+      <div id="questionView" class="hidden">
+        <div class="q-meta" id="qMeta"></div>
+        <div class="q-stem" id="qStem"></div>
+        <div class="options" id="qOptions"></div>
+        <div class="answer-card hidden" id="answerCard"></div>
+
+        <div class="nav-row">
+          <button class="btn" id="prevBtn">→ قبلی</button>
+          <div class="goto-box">
+            <span>برو به سؤال:</span>
+            <input type="number" id="gotoInput" min="1" />
+            <button class="btn" id="gotoBtn">برو</button>
+          </div>
+          <button class="btn btn-primary" id="nextBtn">بعدی ←</button>
         </div>
-        <div class="progress-stats" id="progressStats" style="margin-top:12px;"></div>
-        <div class="bar"><span id="progressBar" style="width:0%"></span></div>
       </div>
+    </main>
+  </div>
 
-      <div class="q-card" id="qCard"></div>
+  <footer class="app">
+    بانک سؤالات بورد زنان و زایمان · داده‌ها صرفاً جهت مرور آموزشی · سؤال‌های دارای نشان «نیازمند بازبینی علمی» باید پیش از استناد بازبینی شوند.
+  </footer>
+</div>
 
-      <div class="nav-bar">
-        <button class="nav-btn" id="prevBtn"><i class="ti ti-chevron-right"></i> سؤال قبلی</button>
-        <div class="jump-box">
-          <span>برو به سؤال:</span>
-          <input type="number" id="jumpInput" min="1" />
-          <button class="nav-btn" id="jumpBtn">برو</button>
-        </div>
-        <button class="nav-btn primary" id="nextBtn">سؤال بعدی <i class="ti ti-chevron-left"></i></button>
-      </div>
-      <div class="jump-error" id="jumpError"></div>
-      <div class="counter-line" id="counterLine"></div>
-    </section>
-  </main>
+<script>
+"use strict";
+(function () {
+  var STORAGE_KEY = "gynqb-progress-v1";
 
-  <script>
-  (function () {
-    "use strict";
+  var state = {
+    questions: [],
+    summary: null,
+    byBook: {},          // book_fa -> [questions]
+    currentBook: null,
+    currentChapterKey: null,
+    currentList: [],     // questions in selected chapter
+    currentIndex: 0,
+    progress: {}         // question_id -> {selected, correct|null, seen:true}
+  };
 
-    // ---------------------------------------------------------------------
-    // وضعیت سراسری
-    // ---------------------------------------------------------------------
-    var STORAGE_KEY = "gynqb-progress-v1";
-    var OPTION_LABELS = ["الف", "ب", "ج", "د"];
+  // ---------- DOM helpers ----------
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
 
-    var state = {
-      questions: [],
-      summary: null,
-      byBook: {},          // book_fa -> [questions]
-      currentBook: null,   // book_fa
-      currentChapterKey: null,
-      chapterQuestions: [], // questions of current chapter (ordered)
-      index: 0,            // index within chapterQuestions
-      progress: {}         // loaded from localStorage
-    };
+  // ---------- localStorage ----------
+  function loadProgress() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      state.progress = raw ? JSON.parse(raw) : {};
+    } catch (e) { state.progress = {}; }
+  }
+  function saveProgress() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress)); } catch (e) {}
+  }
 
-    // ---------------------------------------------------------------------
-    // ابزارهای کوتاه
-    // ---------------------------------------------------------------------
-    function $(id) { return document.getElementById(id); }
-    function el(tag, cls, html) {
-      var e = document.createElement(tag);
-      if (cls) e.className = cls;
-      if (html != null) e.innerHTML = html;
-      return e;
-    }
-    function esc(str) {
-      return String(str == null ? "" : str)
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-    function normalizeText(str) {
-      // یکدست‌سازی برای جستجو: حذف فاصله‌ی اضافه و یکسان‌سازی ی/ک
-      return String(str || "")
-        .replace(/ي/g, "ی")  // ي عربی -> ی فارسی
-        .replace(/ك/g, "ک")  // ك عربی -> ک فارسی
-        .replace(/‌/g, " ")
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
-    }
-    function toFa(num) {
-      var d = "۰۱۲۳۴۵۶۷۸۹";
-      return String(num).replace(/[0-9]/g, function (m) { return d[+m]; });
-    }
-    var BOOK_ICONS = {
-      "ویلیامز": "ti-baby-carriage",
-      "نواک": "ti-gender-female",
-      "اسپیروف": "ti-dna",
-      "تلیندز": "ti-scalpel",
-      "آپتودیت": "ti-cloud-search",
-      "سایر": "ti-dots"
-    };
+  // ---------- Data loading (relative paths for GitHub Pages /gynqb/) ----------
+  function checkResp(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status + " برای " + r.url);
+    return r.json();
+  }
 
-    // ---------------------------------------------------------------------
-    // بارگذاری داده‌ها
-    // ---------------------------------------------------------------------
-    function loadData() {
-      showView("loading");
-      Promise.all([
-        fetch("./questions.json").then(checkResp),
-        fetch("./summary.json").then(checkResp)
-      ]).then(function (res) {
-        state.questions = res[0];
-        state.summary = res[1];
-        if (!Array.isArray(state.questions) || !state.questions.length) {
-          throw new Error("فایل سؤالات خالی است یا ساختار درستی ندارد.");
-        }
-        indexQuestions();
-        loadProgress();
-        renderHeaderStats();
-        renderBookCards();
-        showView("books");
-      }).catch(function (err) {
-        showError(err && err.message ? err.message : "خطای ناشناخته در بارگذاری داده‌ها.");
-      });
-    }
-
-    function checkResp(r) {
-      if (!r.ok) throw new Error("فایل داده پیدا نشد (کد " + r.status + ").");
-      return r.json().catch(function () {
-        throw new Error("ساختار فایل JSON معتبر نیست.");
-      });
-    }
-
-    function indexQuestions() {
-      state.byBook = {};
-      state.questions.forEach(function (q) {
-        (state.byBook[q.book_fa] = state.byBook[q.book_fa] || []).push(q);
-      });
-    }
-
-    // ---------------------------------------------------------------------
-    // localStorage
-    // ---------------------------------------------------------------------
-    function loadProgress() {
-      try {
-        var raw = localStorage.getItem(STORAGE_KEY);
-        state.progress = raw ? JSON.parse(raw) : {};
-      } catch (e) { state.progress = {}; }
-      if (!state.progress || typeof state.progress !== "object") state.progress = {};
-    }
-    function saveProgress() {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress)); } catch (e) {}
-    }
-    function chapterProgress(key) {
-      if (!state.progress[key]) state.progress[key] = { answers: {} };
-      if (!state.progress[key].answers) state.progress[key].answers = {};
-      return state.progress[key];
-    }
-
-    // ---------------------------------------------------------------------
-    // Views
-    // ---------------------------------------------------------------------
-    var VIEWS = ["loading", "error", "books", "chapters", "question"];
-    function showView(name) {
-      $("viewLoading").classList.toggle("hidden", name !== "loading");
-      $("viewError").classList.toggle("hidden", name !== "error");
-      $("viewBooks").classList.toggle("hidden", name !== "books");
-      $("viewChapters").classList.toggle("hidden", name !== "chapters");
-      $("viewQuestion").classList.toggle("hidden", name !== "question");
-      renderCrumbs(name);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    function showError(msg) {
-      $("errorMsg").textContent = msg;
-      showView("error");
-    }
-
-    function renderCrumbs(view) {
-      var c = $("crumbs");
-      if (view !== "books" && view !== "chapters" && view !== "question") {
-        c.classList.add("hidden"); return;
-      }
-      c.classList.remove("hidden");
-      c.innerHTML = "";
-      var home = el("button", "crumb-btn", '<i class="ti ti-home"></i> رفرنس‌ها');
-      home.dataset.nav = "books";
-      c.appendChild(home);
-      if ((view === "chapters" || view === "question") && state.currentBook) {
-        c.appendChild(el("span", "sep", "‹"));
-        var b = el("button", "crumb-btn", '<i class="ti ti-book"></i> ' + esc(state.currentBook));
-        b.dataset.nav = "chapters";
-        c.appendChild(b);
-      }
-      if (view === "question" && state.chapterQuestions.length) {
-        c.appendChild(el("span", "sep", "‹"));
-        var cq = state.chapterQuestions[0];
-        c.appendChild(el("span", "", "فصل " + esc(cq.chapter)));
-      }
-    }
-
-    // ---------------------------------------------------------------------
-    // Header stats
-    // ---------------------------------------------------------------------
-    function renderHeaderStats() {
-      var s = state.summary;
-      var booksCount = (s.book_order || Object.keys(state.byBook)).length;
-      var items = [
-        { i: "ti-clipboard-list", v: s.total, t: "سؤال" },
-        { i: "ti-books", v: booksCount, t: "رفرنس" },
-        { i: "ti-list-numbers", v: s.total_chapters, t: "فصل" },
-        { i: "ti-flag", v: s.review_count, t: "نیازمند بازبینی" }
-      ];
-      var box = $("headerStats");
-      box.innerHTML = "";
-      items.forEach(function (it) {
-        box.appendChild(el("div", "stat-pill",
-          '<i class="ti ' + it.i + '"></i> <b>' + toFa(it.v) + '</b> ' + it.t));
-      });
-    }
-
-    // ---------------------------------------------------------------------
-    // Book cards
-    // ---------------------------------------------------------------------
-    function renderBookCards() {
-      var s = state.summary;
-      var primary = $("primaryBooks");
-      var comp = $("complementaryBooks");
-      primary.innerHTML = ""; comp.innerHTML = "";
-      var books = s.books || [];
-      books.forEach(function (b, i) {
-        var card = buildBookCard(b, i);
-        (b.is_primary ? primary : comp).appendChild(card);
-      });
-    }
-    function buildBookCard(b, i) {
-      var icon = BOOK_ICONS[b.book_fa] || "ti-book";
-      var card = el("button", "book-card " + (b.is_primary ? "primary" : "complementary"));
-      card.style.animationDelay = (i * 40) + "ms";
-      card.dataset.book = b.book_fa;
-      card.innerHTML =
-        (b.is_primary ? '<span class="badge-primary">رفرنس اصلی</span>' : '') +
-        '<div class="bc-icon"><i class="ti ' + icon + '"></i></div>' +
-        '<div class="bc-name">' + esc(b.book_fa) + '</div>' +
-        '<div class="bc-meta">' +
-          '<span><i class="ti ti-clipboard-list"></i> ' + toFa(b.count) + ' سؤال</span>' +
-          '<span><i class="ti ti-list-numbers"></i> ' + toFa(b.chapter_count) + ' فصل</span>' +
-        '</div>';
-      return card;
-    }
-
-    function selectBook(bookFa) {
-      state.currentBook = bookFa;
-      renderChapterList("");
-      $("chaptersBookName").textContent = bookFa;
-      $("chapterSearch").value = "";
-      showView("chapters");
-    }
-
-    // ---------------------------------------------------------------------
-    // Chapter list
-    // ---------------------------------------------------------------------
-    function currentBookChapters() {
-      var s = state.summary;
-      var entry = (s.books || []).find(function (b) { return b.book_fa === state.currentBook; });
-      return entry ? entry.chapters : [];
-    }
-
-    function renderChapterList(filter) {
-      var list = $("chapterList");
-      list.innerHTML = "";
-      var chapters = currentBookChapters();
-      var nf = normalizeText(filter);
-      var shown = chapters.filter(function (c) {
-        if (!nf) return true;
-        return normalizeText(c.chapter_title).indexOf(nf) !== -1 ||
-               normalizeText(c.chapter).indexOf(nf) !== -1;
-      });
-      if (!shown.length) {
-        list.appendChild(el("div", "empty-note",
-          nf ? "فصلی با این عنوان پیدا نشد." : "برای این رفرنس فصلی ثبت نشده است."));
-        return;
-      }
-      shown.forEach(function (c, i) {
-        var item = el("div", "chapter-item");
-        item.style.animationDelay = (Math.min(i, 12) * 25) + "ms";
-        item.dataset.chapterKey = c.chapter_key;
-        var reviewBit = c.review_count
-          ? '<span class="review-mini"><i class="ti ti-flag"></i> ' + toFa(c.review_count) + ' بازبینی</span>'
-          : '';
-        item.innerHTML =
-          '<div class="chapter-num">' + esc(c.chapter) + '</div>' +
-          '<div class="chapter-main">' +
-            '<div class="chapter-title-txt">' + esc(c.chapter_title) + '</div>' +
-            '<div class="chapter-sub">' +
-              '<span><i class="ti ti-clipboard-list"></i> ' + toFa(c.count) + ' سؤال</span>' +
-              reviewBit +
-            '</div>' +
-          '</div>' +
-          '<i class="ti ti-chevron-left"></i>';
-        list.appendChild(item);
-      });
-    }
-
-    function selectChapter(chapterKey) {
-      state.currentChapterKey = chapterKey;
-      state.chapterQuestions = (state.byBook[state.currentBook] || [])
-        .filter(function (q) { return q.chapter_key === chapterKey; });
-      // resume on first unanswered question
-      var prog = chapterProgress(chapterKey);
-      var resumeAt = 0;
-      for (var k = 0; k < state.chapterQuestions.length; k++) {
-        if (!prog.answers[state.chapterQuestions[k].question_id]) { resumeAt = k; break; }
-        resumeAt = k;
-      }
-      state.index = resumeAt;
-      showView("question");
-      renderQuestion();
-    }
-
-    // ---------------------------------------------------------------------
-    // Render question
-    // ---------------------------------------------------------------------
-    function renderQuestion() {
-      var q = state.chapterQuestions[state.index];
-      if (!q) return;
-      renderQMeta(q);
+  function boot() {
+    loadProgress();
+    Promise.all([
+      fetch("./questions.json").then(checkResp),
+      fetch("./summary.json").then(checkResp)
+    ]).then(function (res) {
+      state.questions = res[0] || [];
+      state.summary = res[1] || {};
+      indexData();
+      renderHeaderStats();
+      renderBooks();
       renderProgress();
+    }).catch(function (err) {
+      $("appLayout").classList.add("hidden");
+      $("errorState").classList.remove("hidden");
+      $("errorMsg").textContent = "فایل سؤالات پیدا نشد یا قابل خواندن نبود. (" + err.message + ")";
+    });
+  }
 
-      var prog = chapterProgress(state.currentChapterKey);
-      var chosen = prog.answers[q.question_id] || null;
+  function indexData() {
+    state.byBook = {};
+    state.questions.forEach(function (q) {
+      (state.byBook[q.book_fa] = state.byBook[q.book_fa] || []).push(q);
+    });
+  }
 
-      var card = $("qCard");
-      card.innerHTML = "";
+  // ---------- Header stats ----------
+  function renderHeaderStats() {
+    var s = state.summary || {};
+    var box = $("headerStats");
+    box.innerHTML = "";
+    var chips = [
+      ["کل سؤال‌ها", s.total || state.questions.length],
+      ["رفرنس‌ها", s.total_books || Object.keys(state.byBook).length],
+      ["فصل‌ها / موضوعات", s.total_chapters || ""],
+      ["نیازمند بازبینی", s.review_count || 0]
+    ];
+    chips.forEach(function (c) {
+      var chip = el("div", "stat-chip");
+      chip.innerHTML = c[0] + ": <b>" + faNum(c[1]) + "</b>";
+      box.appendChild(chip);
+    });
+  }
 
-      // top line: number + review badge
-      var top = el("div", "q-topline");
-      top.appendChild(el("span", "q-number-badge",
-        "سؤال " + toFa(q.question_number) + " از " + toFa(state.chapterQuestions.length)));
-      if (q.review_needed) {
-        top.appendChild(el("span", "review-badge", '<i class="ti ti-flag"></i> نیازمند بازبینی علمی'));
+  // ---------- Books ----------
+  function renderBooks() {
+    var list = $("bookList");
+    list.innerHTML = "";
+    var books = (state.summary && state.summary.books) ? state.summary.books : [];
+    if (!books.length) {
+      books = Object.keys(state.byBook).map(function (b) {
+        return { book_fa: b, count: state.byBook[b].length };
+      });
+    }
+    books.forEach(function (b) {
+      if (!b.count) return;
+      var btn = el("button", "book-btn");
+      btn.innerHTML = '<span class="b-name">' + escapeHtml(b.book_fa) + '</span>' +
+        '<span class="b-count">' + faNum(b.count) + " سؤال</span>";
+      btn.onclick = function () { selectBook(b.book_fa); };
+      btn.setAttribute("data-book", b.book_fa);
+      list.appendChild(btn);
+    });
+  }
+
+  function selectBook(bookFa) {
+    state.currentBook = bookFa;
+    state.currentChapterKey = null;
+    Array.prototype.forEach.call(document.querySelectorAll(".book-btn"), function (b) {
+      b.classList.toggle("active", b.getAttribute("data-book") === bookFa);
+    });
+    var isTopic = bookFa === "آپتودیت";
+    $("chapterSectionLabel").textContent = isTopic ? "انتخاب موضوع" : "انتخاب فصل";
+    renderChapters(bookFa);
+    $("chapterSection").classList.remove("hidden");
+  }
+
+  function getChaptersForBook(bookFa) {
+    var books = (state.summary && state.summary.books) ? state.summary.books : [];
+    for (var i = 0; i < books.length; i++) {
+      if (books[i].book_fa === bookFa) return books[i].chapters || [];
+    }
+    // fallback: build from questions
+    var seen = {}, out = [];
+    (state.byBook[bookFa] || []).forEach(function (q) {
+      if (!seen[q.chapter_key]) {
+        seen[q.chapter_key] = { chapter_key: q.chapter_key, chapter_label: q.chapter_label, count: 0, review_count: 0, is_topic: q.is_topic };
+        out.push(seen[q.chapter_key]);
       }
-      card.appendChild(top);
+      seen[q.chapter_key].count++;
+      if (q.review_needed) seen[q.chapter_key].review_count++;
+    });
+    return out;
+  }
 
-      card.appendChild(el("div", "q-stem", esc(q.stem)));
+  function renderChapters(bookFa) {
+    var list = $("chapterList");
+    list.innerHTML = "";
+    var chapters = getChaptersForBook(bookFa);
+    chapters.forEach(function (c) {
+      var btn = el("button", "chapter-btn");
+      var title = c.chapter_label || c.chapter_title || "";
+      var t = el("span", "c-title", title);
+      var cnt = el("span", "c-count", faNum(c.count) + " سؤال");
+      btn.appendChild(t);
+      btn.appendChild(cnt);
+      btn.setAttribute("data-chk", c.chapter_key);
+      btn.onclick = function () { selectChapter(bookFa, c.chapter_key); };
+      list.appendChild(btn);
+    });
+  }
 
-      // options
-      var optList = el("div", "opt-list");
-      var hasAnyOption = OPTION_LABELS.some(function (l) { return (q.options[l] || "").trim(); });
-      if (!hasAnyOption) {
-        optList.appendChild(el("div", "opt empty-opt",
-          '<span class="opt-text">گزینه‌ای برای این سؤال در دیتابیس ثبت نشده است.</span>'));
-      } else {
-        OPTION_LABELS.forEach(function (lab) {
-          var text = (q.options[lab] || "").trim();
-          var opt = el("button", "opt");
-          opt.dataset.choice = lab;
-          if (!text) { opt.classList.add("empty-opt", "locked"); }
-          opt.innerHTML =
-            '<span class="opt-key">' + lab + '</span>' +
-            '<span class="opt-text">' + (text ? esc(text) : "—") + '</span>' +
-            '<i class="ti opt-mark"></i>';
-          optList.appendChild(opt);
-        });
+  function selectChapter(bookFa, chapterKey) {
+    state.currentChapterKey = chapterKey;
+    Array.prototype.forEach.call(document.querySelectorAll(".chapter-btn"), function (b) {
+      b.classList.toggle("active", b.getAttribute("data-chk") === chapterKey);
+    });
+    state.currentList = (state.byBook[bookFa] || []).filter(function (q) {
+      return q.chapter_key === chapterKey;
+    });
+    state.currentIndex = 0;
+    $("welcome").classList.add("hidden");
+    $("questionView").classList.remove("hidden");
+    $("gotoInput").max = state.currentList.length;
+    renderQuestion();
+  }
+
+  // ---------- Question rendering ----------
+  function renderQuestion() {
+    var list = state.currentList;
+    if (!list.length) return;
+    var q = list[state.currentIndex];
+
+    // meta
+    var meta = $("qMeta");
+    meta.innerHTML = "";
+    function m(label, val) {
+      var sp = el("span");
+      sp.innerHTML = escapeHtml(label) + ": <b>" + escapeHtml(val) + "</b>";
+      meta.appendChild(sp);
+    }
+    m("نام کتاب", q.book_fa);
+    m(q.is_topic ? "موضوع" : "فصل", (q.chapter_label || "").replace(/^فصل\s*/, "").replace(/^موضوع:\s*/, ""));
+    m("نوع آزمون", q.exam_type || "نامشخص");
+    m("سال", q.year || "۱۴۰۳");
+    var prog = el("span", "q-progress-line");
+    prog.textContent = "سؤال " + faNum(state.currentIndex + 1) + " از " + faNum(list.length);
+    meta.appendChild(prog);
+
+    // stem
+    $("qStem").innerHTML = '<span class="q-number-badge">' + faNum(state.currentIndex + 1) + "</span>" +
+      escapeHtml(q.stem);
+
+    // options
+    var opts = $("qOptions");
+    opts.innerHTML = "";
+    var saved = state.progress[q.question_id];
+    var labels = ["الف", "ب", "ج", "د"];
+    labels.forEach(function (lab) {
+      var text = (q.options && q.options[lab]) ? q.options[lab] : "";
+      if (!text) return;
+      var btn = el("button", "option");
+      btn.appendChild(el("span", "opt-label", lab));
+      btn.appendChild(el("span", "opt-text", text));
+      btn.setAttribute("data-opt", lab);
+      btn.onclick = function () { chooseOption(q, lab); };
+      opts.appendChild(btn);
+    });
+
+    if (saved) {
+      applyAnswerState(q, saved.selected);
+    } else {
+      $("answerCard").classList.add("hidden");
+    }
+
+    // nav
+    $("prevBtn").disabled = state.currentIndex === 0;
+    $("nextBtn").disabled = state.currentIndex === list.length - 1;
+    $("gotoInput").value = state.currentIndex + 1;
+  }
+
+  function chooseOption(q, lab) {
+    if (state.progress[q.question_id]) return; // already answered
+    var correct = q.answer ? (lab === q.answer) : null;
+    state.progress[q.question_id] = { selected: lab, correct: correct, seen: true };
+    saveProgress();
+    applyAnswerState(q, lab);
+    renderProgress();
+  }
+
+  function applyAnswerState(q, selected) {
+    var hasAnswer = !!q.answer;
+    Array.prototype.forEach.call(document.querySelectorAll("#qOptions .option"), function (btn) {
+      var lab = btn.getAttribute("data-opt");
+      btn.disabled = true;
+      if (hasAnswer && lab === q.answer) btn.classList.add("correct");
+      if (lab === selected) {
+        if (!hasAnswer) btn.classList.add("selected");
+        else if (lab !== q.answer) btn.classList.add("wrong");
       }
-      card.appendChild(optList);
+    });
+    renderAnswerCard(q);
+  }
 
-      // answer panel placeholder
-      card.appendChild(el("div", "answer-panel hidden", ""));
+  function renderAnswerCard(q) {
+    var card = $("answerCard");
+    card.classList.remove("hidden");
+    card.innerHTML = "";
 
-      // if already answered -> lock & reveal
-      if (chosen) applyAnswerUI(q, chosen, false);
-
-      // nav state
-      $("prevBtn").disabled = state.index === 0;
-      $("nextBtn").disabled = state.index === state.chapterQuestions.length - 1;
-      $("jumpInput").value = "";
-      $("jumpInput").max = state.chapterQuestions.length;
-      $("jumpInput").placeholder = toFa(q.question_number);
-      $("jumpError").textContent = "";
-      $("counterLine").textContent =
-        "سؤال " + toFa(q.question_number) + " از " + toFa(state.chapterQuestions.length) + " سؤال این فصل";
+    var head = el("div", "answer-head " + (q.review_needed ? "review" : "ok"));
+    if (q.answer) {
+      head.appendChild(el("span", null, "پاسخ صحیح: گزینه " + q.answer));
+    } else {
+      head.appendChild(el("span", null, "پاسخ صحیح در دیتابیس ثبت نشده است"));
     }
+    head.appendChild(q.review_needed
+      ? badge("نیازمند بازبینی علمی", "badge-review")
+      : badge("تأییدشده", "badge-ok"));
+    card.appendChild(head);
 
-    function renderQMeta(q) {
-      var grid = $("qMetaGrid");
-      var examDetail = (q.exam_region ? q.exam_region + " — " : "") + q.year;
-      var rows = [
-        { i: "ti-book", l: "نام کتاب", v: q.book_fa },
-        { i: "ti-bookmark", l: "فصل", v: "فصل " + q.chapter + " — " + q.chapter_title },
-        { i: "ti-school", l: "نوع آزمون", v: q.exam_type || "نامشخص" },
-        { i: "ti-calendar", l: "جزئیات آزمون", v: examDetail }
-      ];
-      grid.innerHTML = "";
-      rows.forEach(function (r) {
-        grid.appendChild(el("div", "q-meta-item",
-          '<div class="lbl"><i class="ti ' + r.i + '"></i> ' + esc(r.l) + '</div>' +
-          '<div class="val">' + esc(r.v) + '</div>'));
-      });
+    var body = el("div", "answer-body");
+
+    body.appendChild(el("div", "field-label", "توضیح"));
+    var ex = el("div", "expl-text");
+    ex.textContent = q.explanation || "—";
+    body.appendChild(ex);
+
+    body.appendChild(el("div", "field-label", "رفرنس"));
+    body.appendChild(el("div", "ref-box", q.reference_text || (q.book_fa + " - " + (q.chapter_label || ""))));
+
+    body.appendChild(el("div", "field-label", "وضعیت علمی"));
+    body.appendChild(el("div", null, q.review_needed ? "نیازمند بازبینی علمی" : "تأییدشده"));
+
+    card.appendChild(body);
+  }
+
+  function badge(text, cls) {
+    var b = el("span", cls);
+    b.textContent = text;
+    return b;
+  }
+
+  // ---------- Navigation ----------
+  function go(delta) {
+    var ni = state.currentIndex + delta;
+    if (ni < 0 || ni >= state.currentList.length) return;
+    state.currentIndex = ni;
+    renderQuestion();
+  }
+  function gotoNumber() {
+    var n = parseInt($("gotoInput").value, 10);
+    if (isNaN(n) || n < 1 || n > state.currentList.length) return;
+    state.currentIndex = n - 1;
+    renderQuestion();
+  }
+
+  // ---------- Progress ----------
+  function renderProgress() {
+    var answered = 0, correct = 0, wrong = 0, seen = 0;
+    var total = state.questions.length || 1;
+    for (var id in state.progress) {
+      if (!state.progress.hasOwnProperty(id)) continue;
+      var p = state.progress[id];
+      seen++;
+      answered++;
+      if (p.correct === true) correct++;
+      else if (p.correct === false) wrong++;
     }
+    $("pAnswered").textContent = faNum(answered);
+    $("pSeen").textContent = faNum(seen);
+    $("pCorrect").textContent = faNum(correct);
+    $("pWrong").textContent = faNum(wrong);
+    $("pBar").style.width = Math.round((seen / total) * 100) + "%";
+  }
 
-    // ---------------------------------------------------------------------
-    // Answer handling
-    // ---------------------------------------------------------------------
-    function handleAnswer(choice) {
-      var q = state.chapterQuestions[state.index];
-      var prog = chapterProgress(state.currentChapterKey);
-      if (prog.answers[q.question_id]) return; // already answered, locked
-      if (!(q.options[choice] || "").trim()) return; // can't pick empty option
-      prog.answers[q.question_id] = choice;
-      saveProgress();
-      applyAnswerUI(q, choice, true);
-      renderProgress();
-    }
+  function resetProgress() {
+    if (!window.confirm("همه‌ی پیشرفت شما پاک شود؟")) return;
+    state.progress = {};
+    saveProgress();
+    renderProgress();
+    if (state.currentList.length) renderQuestion();
+  }
 
-    function applyAnswerUI(q, choice, animate) {
-      var card = $("qCard");
-      var opts = card.querySelectorAll(".opt[data-choice]");
-      var correct = q.answer; // may be ""
-      opts.forEach(function (o) {
-        o.classList.add("locked");
-        var lab = o.dataset.choice;
-        var mark = o.querySelector(".opt-mark");
-        if (correct && lab === correct) {
-          o.classList.add("correct");
-          if (mark) mark.className = "ti opt-mark ti-circle-check";
-        } else if (lab === choice && lab !== correct) {
-          o.classList.add("wrong");
-          if (mark) mark.className = "ti opt-mark ti-circle-x";
-        } else {
-          o.classList.add("disabled");
-        }
-        if (!animate) o.style.animation = "none";
-      });
+  // ---------- Utils ----------
+  var FA_DIGITS = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  function faNum(n) {
+    return String(n).replace(/[0-9]/g, function (d) { return FA_DIGITS[+d]; });
+  }
+  function escapeHtml(str) {
+    return String(str == null ? "" : str)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
 
-      var panel = card.querySelector(".answer-panel");
-      panel.classList.remove("hidden");
-      panel.innerHTML = buildAnswerPanel(q, choice);
-    }
-
-    function buildAnswerPanel(q, choice) {
-      var html = "";
-      var hasAnswer = !!q.answer;
-      if (hasAnswer) {
-        if (choice === q.answer) {
-          html += '<div class="verdict good"><i class="ti ti-circle-check"></i> پاسخ شما صحیح است.</div>';
-        } else {
-          html += '<div class="verdict bad"><i class="ti ti-circle-x"></i> پاسخ شما نادرست بود.</div>';
-        }
-        html += '<div class="ans-block"><div class="ans-h"><i class="ti ti-check"></i> پاسخ صحیح</div>' +
-                '<div class="ans-correct">گزینه ' + esc(q.answer) + '</div></div>';
-      } else {
-        html += '<div class="verdict neutral"><i class="ti ti-info-circle"></i> ' +
-                'پاسخ صحیح در دیتابیس به‌صورت ساختاریافته مشخص نشده است.</div>';
-      }
-
-      html += '<div class="ans-block"><div class="ans-h"><i class="ti ti-notes"></i> پاسخنامه</div>' +
-              '<div class="explain-text">' + esc(q.explanation) + '</div></div>';
-
-      var ref = q.book_fa + " — فصل " + q.chapter + " — " + q.chapter_title;
-      html += '<div class="ans-block"><div class="ans-h"><i class="ti ti-bookmark"></i> رفرنس</div>' +
-              '<div class="citation-text">' + esc(ref);
-      if (q.citation && normalizeText(q.citation) !== normalizeText(q.explanation)) {
-        html += '<br><span style="color:var(--c-text-3)">' + esc(q.citation) + '</span>';
-      }
-      html += '</div></div>';
-      return html;
-    }
-
-    // ---------------------------------------------------------------------
-    // Progress display
-    // ---------------------------------------------------------------------
-    function renderProgress() {
-      var total = state.chapterQuestions.length;
-      var prog = chapterProgress(state.currentChapterKey);
-      var done = 0, correct = 0, wrong = 0;
-      state.chapterQuestions.forEach(function (q) {
-        var a = prog.answers[q.question_id];
-        if (!a) return;
-        done++;
-        if (q.answer) { if (a === q.answer) correct++; else wrong++; }
-      });
-      var pct = total ? Math.round(done / total * 100) : 0;
-      $("progressStats").innerHTML =
-        '<span class="pstat done"><i class="ti ti-checklist"></i> پاسخ‌داده: ' + toFa(done) + ' از ' + toFa(total) + '</span>' +
-        '<span class="pstat correct"><i class="ti ti-circle-check"></i> درست: ' + toFa(correct) + '</span>' +
-        '<span class="pstat wrong"><i class="ti ti-circle-x"></i> غلط: ' + toFa(wrong) + '</span>' +
-        '<span class="pstat done"><i class="ti ti-percentage"></i> پیشرفت: ' + toFa(pct) + '٪</span>';
-      $("progressBar").style.width = pct + "%";
-    }
-
-    function resetChapterProgress() {
-      if (!state.currentChapterKey) return;
-      if (!window.confirm("آیا از پاک کردن پیشرفت این فصل مطمئن هستید؟ این کار قابل بازگشت نیست.")) return;
-      delete state.progress[state.currentChapterKey];
-      saveProgress();
-      state.index = 0;
-      renderQuestion();
-    }
-
-    // ---------------------------------------------------------------------
-    // Navigation
-    // ---------------------------------------------------------------------
-    function goPrev() { if (state.index > 0) { state.index--; renderQuestion(); } }
-    function goNext() { if (state.index < state.chapterQuestions.length - 1) { state.index++; renderQuestion(); } }
-    function jumpToQuestion() {
-      var raw = $("jumpInput").value.trim();
-      var err = $("jumpError");
-      if (!raw) { err.textContent = "لطفاً شماره سؤال را وارد کنید."; return; }
-      var n = parseInt(raw, 10);
-      if (isNaN(n) || n < 1 || n > state.chapterQuestions.length) {
-        err.textContent = "شماره سؤال باید بین ۱ تا " + toFa(state.chapterQuestions.length) + " باشد.";
-        return;
-      }
-      state.index = n - 1;
-      renderQuestion();
-    }
-
-    // ---------------------------------------------------------------------
-    // Event delegation
-    // ---------------------------------------------------------------------
-    function bindEvents() {
-      document.addEventListener("click", function (e) {
-        var navEl = e.target.closest("[data-nav]");
-        if (navEl) {
-          var nav = navEl.dataset.nav;
-          if (nav === "books") showView("books");
-          else if (nav === "chapters") showView("chapters");
-          return;
-        }
-        var book = e.target.closest("[data-book]");
-        if (book) { selectBook(book.dataset.book); return; }
-
-        var chap = e.target.closest("[data-chapterKey], [data-chapter-key]");
-        if (chap) { selectChapter(chap.dataset.chapterKey); return; }
-
-        var opt = e.target.closest(".opt[data-choice]");
-        if (opt && !opt.classList.contains("locked")) { handleAnswer(opt.dataset.choice); return; }
-      });
-
-      $("prevBtn").addEventListener("click", goPrev);
-      $("nextBtn").addEventListener("click", goNext);
-      $("jumpBtn").addEventListener("click", jumpToQuestion);
-      $("resetBtn").addEventListener("click", resetChapterProgress);
-      $("retryBtn").addEventListener("click", loadData);
-      $("jumpInput").addEventListener("keydown", function (e) {
-        if (e.key === "Enter") jumpToQuestion();
-      });
-      $("chapterSearch").addEventListener("input", function (e) {
-        renderChapterList(e.target.value);
-      });
-
-      document.addEventListener("keydown", function (e) {
-        if ($("viewQuestion").classList.contains("hidden")) return;
-        if (e.target.tagName === "INPUT") return;
-        // RTL: راست = قبلی منطقی، چپ = بعدی
-        if (e.key === "ArrowRight") goPrev();
-        else if (e.key === "ArrowLeft") goNext();
-      });
-    }
-
-    // ---------------------------------------------------------------------
-    // Init
-    // ---------------------------------------------------------------------
-    bindEvents();
-    loadData();
-  })();
-  </script>
+  // ---------- Wire up ----------
+  document.addEventListener("DOMContentLoaded", function () {
+    $("prevBtn").onclick = function () { go(-1); };
+    $("nextBtn").onclick = function () { go(1); };
+    $("gotoBtn").onclick = gotoNumber;
+    $("gotoInput").addEventListener("keydown", function (e) { if (e.key === "Enter") gotoNumber(); });
+    $("resetBtn").onclick = resetProgress;
+    document.addEventListener("keydown", function (e) {
+      if (e.target && e.target.tagName === "INPUT") return;
+      if (e.key === "ArrowLeft") go(1);        // RTL: چپ = بعدی
+      else if (e.key === "ArrowRight") go(-1);  // RTL: راست = قبلی
+    });
+    boot();
+  });
+})();
+</script>
 </body>
 </html>
