@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>بانک سؤالات زنان و زایمان</title>
+  <meta name="description" content="مجموعه جامع سؤالات بورد، ارتقا و فلوشیپ زنان و زایمان" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+  <style>
+    :root {
+      --c-page: #f2f4f7;
+      --c-surface: #ffffff;
+      --c-text: #1a1d23;
+      --c-muted: #687080;
+      --c-border: #dfe3e8;
+      --c-primary: #1b2a4a;
+      --c-blue: #2b5ba8;
+      --c-blue-bg: #ebf1fb;
+      --c-green: #1a7a4a;
+      --c-green-bg: #ebf7f1;
+      --c-red: #b22222;
+      --c-red-bg: #fdeded;
+      --c-warning: #9a6700;
+      --c-warning-bg: #fff8ec;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-card: 0 2px 12px rgba(27, 42, 74, 0.09);
+      font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      background-color: var(--c-page);
+      color: var(--c-text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      direction: rtl;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header styling */
+    header.main-header {
+      background: linear-gradient(135deg, var(--c-primary), var(--c-blue));
+      color: white;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    header.main-header h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    header.main-header p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Stats Grid */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      padding: 14px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat-card .value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--c-primary);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      font-weight: 600;
+    }
+
+    /* Layout structure */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Filters sidebar */
+    .filters-sidebar {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--c-border);
+      padding-bottom: 10px;
+    }
+
+    .filter-group {
+      margin-bottom: 14px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--c-text);
+      margin-bottom: 6px;
+    }
+
+    .filter-control {
+      width: 100% !important;
+      padding: 10px 12px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      background-color: var(--c-page);
+      color: var(--c-text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .filter-control:focus {
+      border-color: var(--c-blue);
+      box-shadow: 0 0 0 3px rgba(43, 91, 168, 0.15);
+      background-color: var(--c-surface);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .btn-reset {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--c-red-bg);
+      color: var(--c-red);
+      border: 1px solid rgba(178, 34, 34, 0.2);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-reset:hover {
+      background-color: rgba(178, 34, 34, 0.1);
+    }
+
+    /* Content Area / Question Card */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .q-card {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .q-card-header {
+      background-color: var(--c-primary);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .q-meta-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .badge.quality-complete {
+      background-color: var(--c-green);
+      border-color: transparent;
+    }
+
+    .badge.quality-review {
+      background-color: var(--c-warning);
+      border-color: transparent;
+    }
+
+    .q-favorite-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: transform 0.15s;
+    }
+
+    .q-favorite-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .q-card-body {
+      padding: 24px;
+    }
+
+    .q-stem {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      margin-top: 0;
+      margin-bottom: 24px;
+      line-height: 2.1;
+      text-align: justify;
+    }
+
+    .q-options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-button {
+      background-color: var(--c-page);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--c-text);
+      text-align: right;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .option-button:hover:not([disabled]) {
+      border-color: var(--c-blue);
+      background-color: var(--c-blue-bg);
+    }
+
+    .option-label {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      color: var(--c-muted);
+      font-weight: 800;
+      font-size: 0.85rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+
+    /* Answer States */
+    .option-button.selected {
+      border-color: var(--c-blue);
+      background-color: var(--c-blue-bg);
+    }
+
+    .option-button.selected .option-label {
+      background-color: var(--c-blue);
+      color: white;
+      border-color: var(--c-blue);
+    }
+
+    .option-button.correct {
+      border-color: var(--c-green);
+      background-color: var(--c-green-bg);
+      color: var(--c-green);
+    }
+
+    .option-button.correct .option-label {
+      background-color: var(--c-green);
+      color: white;
+      border-color: var(--c-green);
+    }
+
+    .option-button.wrong {
+      border-color: var(--c-red);
+      background-color: var(--c-red-bg);
+      color: var(--c-red);
+    }
+
+    .option-button.wrong .option-label {
+      background-color: var(--c-red);
+      color: white;
+      border-color: var(--c-red);
+    }
+
+    /* Feedback Alert and Explanation */
+    .feedback-box {
+      margin-top: 20px;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .feedback-box.correct {
+      background-color: var(--c-green-bg);
+      border: 1px solid rgba(26, 122, 74, 0.2);
+    }
+
+    .feedback-box.wrong {
+      background-color: var(--c-red-bg);
+      border: 1px solid rgba(178, 34, 34, 0.2);
+    }
+
+    .feedback-box.warning {
+      background-color: var(--c-warning-bg);
+      border: 1px solid rgba(154, 103, 0, 0.2);
+    }
+
+    .feedback-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feedback-box.correct .feedback-title { color: var(--c-green); }
+    .feedback-box.wrong .feedback-title { color: var(--c-red); }
+    .feedback-box.warning .feedback-title { color: var(--c-warning); }
+
+    .q-explanation-container {
+      background-color: var(--c-page);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-top: 14px;
+      border: 1px solid var(--c-border);
+    }
+
+    .q-explanation-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--c-primary);
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .q-explanation-text {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--c-text);
+      white-space: pre-line;
+      text-align: justify;
+    }
+
+    .q-occurrences {
+      margin-top: 14px;
+    }
+
+    .q-occurrences summary {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--c-blue);
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .q-occurrences-list {
+      margin-top: 8px;
+      padding-right: 18px;
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      list-style-type: square;
+    }
+
+    /* Navigation Panel */
+    .nav-panel {
+      border-top: 1px solid var(--c-border);
+      background-color: var(--c-page);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 10px 18px;
+      background-color: var(--c-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.15s;
+    }
+
+    .nav-btn:hover:not([disabled]) {
+      background-color: var(--c-blue);
+    }
+
+    .nav-btn:disabled {
+      background-color: var(--c-border);
+      color: var(--c-muted);
+      cursor: not-allowed;
+    }
+
+    .nav-stats {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--c-primary);
+    }
+
+    .jump-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .jump-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--c-muted);
+    }
+
+    .jump-select {
+      padding: 8px 10px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      background-color: var(--c-surface);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--c-text);
+      cursor: pointer;
+    }
+
+    /* Reset Progress button */
+    .btn-clear-progress {
+      padding: 10px 16px;
+      background-color: transparent;
+      color: var(--c-muted);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      align-self: center;
+      transition: all 0.2s;
+    }
+
+    .btn-clear-progress:hover {
+      background-color: var(--c-red-bg);
+      color: var(--c-red);
+      border-color: rgba(178, 34, 34, 0.2);
+    }
+
+    /* Loading / Error States */
+    .loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      gap: 16px;
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--c-border);
+      border-top: 4px solid var(--c-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .error-box {
+      background-color: var(--c-red-bg);
+      border: 1px solid rgba(178, 34, 34, 0.3);
+      color: var(--c-red);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .error-box h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .btn-retry {
+      padding: 10px 24px;
+      background-color: var(--c-red);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-retry:hover {
+      background-color: #900;
+    }
+
+    .empty-results {
+      padding: 40px;
+      text-align: center;
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      color: var(--c-muted);
+    }
+
+    /* Focus styling for keyboard accessibility */
+    button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--c-blue);
+      outline-offset: 2px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <h1>بانک سؤالات زنان و زایمان</h1>
+      <p>مجموعه جامع سؤالات بورد، ارتقا و فلوشیپ</p>
+    </header>
+
+    <!-- Stats Dashboard -->
+    <div id="stats-dashboard" class="stats-container">
+      <div class="stat-card">
+        <div class="value" id="stat-total">—</div>
+        <div class="label">کل سؤال‌ها</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-complete">—</div>
+        <div class="label">سؤال‌های کامل</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-review">—</div>
+        <div class="label">نیازمند بازبینی</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-references">—</div>
+        <div class="label">تعداد رفرنس‌ها</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-chapters">—</div>
+        <div class="label">تعداد فصل‌ها</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="stat-years">—</div>
+        <div class="label">سال‌های آزمون</div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="main-content">
+      <div class="loader">
+        <div class="spinner"></div>
+        <div style="font-weight: 700; color: var(--c-primary);">در حال بارگذاری بانک سؤالات…</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const PROGRESS_KEY = "gynqb-user-progress-v1";
+      const FILTER_STATE_KEY = "gynqb-filters-v1";
+      
+      let allQuestions = [];
+      let filteredQuestions = [];
+      let currentIndex = 0;
+      
+      // User progress structure: { [qid]: { selected: "الف", correct: true/false, favorite: false } }
+      let userProgress = loadUserProgress();
+      
+      function loadUserProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {};
+        } catch (e) {
+          console.error("Failed to load user progress:", e);
+          return {};
+        }
+      }
+
+      function saveUserProgress() {
+        try {
+          localStorage.setItem(PROGRESS_KEY, JSON.stringify(userProgress));
+        } catch (e) {
+          console.error("Failed to save user progress:", e);
+        }
+      }
+
+      function loadFilterState() {
+        try {
+          return JSON.parse(localStorage.getItem(FILTER_STATE_KEY)) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveFilterState(state) {
+        try {
+          localStorage.setItem(FILTER_STATE_KEY, JSON.stringify(state));
+        } catch (e) {}
+      }
+
+      // Initialize Application
+      function init() {
+        fetch("./questions.json")
+          .then(res => {
+            if (!res.ok) throw new Error("داده‌ها یافت نشد.");
+            return res.json();
+          })
+          .then(data => {
+            allQuestions = data.questions || [];
+            calculateAndRenderStats();
+            buildAppLayout();
+          })
+          .catch(err => {
+            renderErrorBox();
+          });
+      }
+
+      function calculateAndRenderStats() {
+        const total = allQuestions.length;
+        const complete = allQuestions.filter(q => q.quality === "complete").length;
+        const review = allQuestions.filter(q => q.quality === "needs_review").length;
+        
+        const refs = new Set();
+        const chaps = new Set();
+        const years = new Set();
+        
+        allQuestions.forEach(q => {
+          if (q.reference) refs.add(q.reference);
+          if (q.chapter) chaps.add(`${q.reference}::${q.chapter}`);
+          if (q.exam_year) years.add(q.exam_year);
+        });
+
+        document.getElementById("stat-total").textContent = toFaDigit(total);
+        document.getElementById("stat-complete").textContent = toFaDigit(complete);
+        document.getElementById("stat-review").textContent = toFaDigit(review);
+        document.getElementById("stat-references").textContent = toFaDigit(refs.size || 1);
+        document.getElementById("stat-chapters").textContent = toFaDigit(chaps.size);
+        document.getElementById("stat-years").textContent = toFaDigit(years.size);
+      }
+
+      function renderErrorBox() {
+        const container = document.getElementById("main-content");
+        container.innerHTML = `
+          <div class="error-box" role="alert">
+            <h3>خطا در بارگذاری بانک سؤال</h3>
+            <p>لطفاً فایل داده یا اتصال را بررسی کنید.</p>
+            <button class="btn-retry" id="btn-retry-load">تلاش مجدد</button>
+          </div>
+        `;
+        document.getElementById("btn-retry-load").addEventListener("click", () => {
+          container.innerHTML = `
+            <div class="loader">
+              <div class="spinner"></div>
+              <div style="font-weight: 700; color: var(--c-primary);">در حال بارگذاری بانک سؤالات…</div>
+            </div>
+          `;
+          init();
+        });
+      }
+
+      function buildAppLayout() {
+        const container = document.getElementById("main-content");
+        container.innerHTML = `
+          <div class="main-layout">
+            <!-- Sidebar with Filters -->
+            <aside class="filters-sidebar" aria-label="فیلترهای سوالات">
+              <h2 class="sidebar-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                فیلترها
+              </h2>
+              
+              <div class="filter-group">
+                <label for="filter-search">جستجو در متن سؤال</label>
+                <input type="text" id="filter-search" class="filter-control" placeholder="کلمه کلیدی..." />
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-ref">مرجع</label>
+                <select id="filter-ref" class="filter-control">
+                  <option value="">همه مراجع</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-chap">فصل</label>
+                <select id="filter-chap" class="filter-control" disabled>
+                  <option value="">همه فصل‌ها</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-type">نوع آزمون</label>
+                <select id="filter-type" class="filter-control">
+                  <option value="">همه آزمون‌ها</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-year">سال آزمون</label>
+                <select id="filter-year" class="filter-control">
+                  <option value="">همه سال‌ها</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-quality">وضعیت کیفیت</label>
+                <select id="filter-quality" class="filter-control">
+                  <option value="">همه کیفیت‌ها</option>
+                  <option value="complete">کامل</option>
+                  <option value="needs_review">نیازمند بازبینی</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filter-progress">وضعیت پاسخ‌دهی</label>
+                <select id="filter-progress" class="filter-control">
+                  <option value="">همه</option>
+                  <option value="answered">پاسخ‌داده‌شده</option>
+                  <option value="unanswered">پاسخ‌داده‌نشده</option>
+                </select>
+              </div>
+
+              <div class="filter-group" id="correctness-group" style="display:none;">
+                <label for="filter-correctness">صحت پاسخ</label>
+                <select id="filter-correctness" class="filter-control">
+                  <option value="">همه</option>
+                  <option value="correct">پاسخ صحیح</option>
+                  <option value="wrong">پاسخ غلط</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label class="checkbox-group">
+                  <input type="checkbox" id="filter-favorite" />
+                  <span>فقط نشان‌شده‌ها (علاقه‌مندی)</span>
+                </label>
+              </div>
+
+              <button class="btn-reset" id="btn-clear-filters">حذف فیلترها</button>
+            </aside>
+
+            <!-- Main Content Card Area -->
+            <div class="content-area" id="card-area">
+              <!-- Rendered Question Card -->
+            </div>
+          </div>
+          
+          <div style="margin-top:30px; display:flex; justify-content:center;">
+            <button class="btn-clear-progress" id="btn-reset-user-progress">پاک کردن پیشرفت کاربر</button>
+          </div>
+        `;
+
+        populateFilterDropdowns();
+        restoreFilters();
+        
+        // Listeners for filters
+        document.getElementById("filter-search").addEventListener("input", () => triggerFiltering(true));
+        document.getElementById("filter-ref").addEventListener("change", () => {
+          populateChaptersDropdown();
+          triggerFiltering(true);
+        });
+        document.getElementById("filter-chap").addEventListener("change", () => triggerFiltering(true));
+        document.getElementById("filter-type").addEventListener("change", () => triggerFiltering(true));
+        document.getElementById("filter-year").addEventListener("change", () => triggerFiltering(true));
+        document.getElementById("filter-quality").addEventListener("change", () => triggerFiltering(true));
+        document.getElementById("filter-progress").addEventListener("change", () => {
+          const val = document.getElementById("filter-progress").value;
+          const corrGroup = document.getElementById("correctness-group");
+          if (val === "answered") {
+            corrGroup.style.display = "block";
+          } else {
+            corrGroup.style.display = "none";
+            document.getElementById("filter-correctness").value = "";
+          }
+          triggerFiltering(true);
+        });
+        document.getElementById("filter-correctness").addEventListener("change", () => triggerFiltering(true));
+        document.getElementById("filter-favorite").addEventListener("change", () => triggerFiltering(true));
+        
+        document.getElementById("btn-clear-filters").addEventListener("click", () => {
+          document.getElementById("filter-search").value = "";
+          document.getElementById("filter-ref").value = "";
+          populateChaptersDropdown();
+          document.getElementById("filter-type").value = "";
+          document.getElementById("filter-year").value = "";
+          document.getElementById("filter-quality").value = "";
+          document.getElementById("filter-progress").value = "";
+          document.getElementById("correctness-group").style.display = "none";
+          document.getElementById("filter-correctness").value = "";
+          document.getElementById("filter-favorite").checked = false;
+          triggerFiltering(true);
+        });
+
+        document.getElementById("btn-reset-user-progress").addEventListener("click", () => {
+          if (confirm("آیا از پاک کردن کامل سابقه پاسخ‌دهی و نشان‌شده‌های خود اطمینان دارید؟")) {
+            userProgress = {};
+            saveUserProgress();
+            triggerFiltering(false);
+          }
+        });
+
+        // First filtration
+        triggerFiltering(false);
+      }
+
+      function populateFilterDropdowns() {
+        const refs = new Set();
+        const types = new Set();
+        const years = new Set();
+
+        allQuestions.forEach(q => {
+          if (q.reference) refs.add(q.reference);
+          if (q.exam_type) types.add(q.exam_type);
+          if (q.exam_year) years.add(q.exam_year);
+        });
+
+        const refSel = document.getElementById("filter-ref");
+        Array.from(refs).sort().forEach(r => {
+          const opt = document.createElement("option");
+          opt.value = r;
+          opt.textContent = r;
+          refSel.appendChild(opt);
+        });
+
+        const typeSel = document.getElementById("filter-type");
+        Array.from(types).sort().forEach(t => {
+          const opt = document.createElement("option");
+          opt.value = t;
+          opt.textContent = t;
+          typeSel.appendChild(opt);
+        });
+
+        const yearSel = document.getElementById("filter-year");
+        Array.from(years).sort().forEach(y => {
+          const opt = document.createElement("option");
+          opt.value = y;
+          opt.textContent = toFaDigit(y);
+          yearSel.appendChild(opt);
+        });
+      }
+
+      function populateChaptersDropdown() {
+        const refVal = document.getElementById("filter-ref").value;
+        const chapSel = document.getElementById("filter-chap");
+        
+        chapSel.innerHTML = '<option value="">همه فصل‌ها</option>';
+        if (!refVal) {
+          chapSel.disabled = true;
+          return;
+        }
+
+        const chaps = new Set();
+        allQuestions.forEach(q => {
+          if (q.reference === refVal && q.chapter) {
+            chaps.add(q.chapter);
+          }
+        });
+
+        if (chaps.size > 0) {
+          chapSel.disabled = false;
+          Array.from(chaps).sort((a, b) => {
+            const aNum = parseFloat(a);
+            const bNum = parseFloat(b);
+            if (!isNaN(aNum) && !isNaN(bNum)) return aNum - bNum;
+            return a.localeCompare(b, "fa");
+          }).forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c;
+            opt.textContent = isNaN(parseFloat(c)) ? c : `فصل ${toFaDigit(c)}`;
+            chapSel.appendChild(opt);
+          });
+        } else {
+          chapSel.disabled = true;
+        }
+      }
+
+      function restoreFilters() {
+        const saved = loadFilterState();
+        if (saved.search) document.getElementById("filter-search").value = saved.search;
+        if (saved.ref) {
+          document.getElementById("filter-ref").value = saved.ref;
+          populateChaptersDropdown();
+          if (saved.chap) document.getElementById("filter-chap").value = saved.chap;
+        }
+        if (saved.type) document.getElementById("filter-type").value = saved.type;
+        if (saved.year) document.getElementById("filter-year").value = saved.year;
+        if (saved.quality) document.getElementById("filter-quality").value = saved.quality;
+        if (saved.progress) {
+          document.getElementById("filter-progress").value = saved.progress;
+          if (saved.progress === "answered") {
+            document.getElementById("correctness-group").style.display = "block";
+            if (saved.correctness) document.getElementById("filter-correctness").value = saved.correctness;
+          }
+        }
+        if (saved.favorite) document.getElementById("filter-favorite").checked = saved.favorite;
+        
+        // Restore last viewed index if valid
+        if (saved.last_index && !isNaN(saved.last_index)) {
+          currentIndex = parseInt(saved.last_index);
+        }
+      }
+
+      function triggerFiltering(resetIndex = true) {
+        const searchVal = document.getElementById("filter-search").value.trim().toLowerCase();
+        const refVal = document.getElementById("filter-ref").value;
+        const chapVal = document.getElementById("filter-chap").value;
+        const typeVal = document.getElementById("filter-type").value;
+        const yearVal = document.getElementById("filter-year").value;
+        const qualVal = document.getElementById("filter-quality").value;
+        const progVal = document.getElementById("filter-progress").value;
+        const corrVal = document.getElementById("filter-correctness").value;
+        const favVal = document.getElementById("filter-favorite").checked;
+
+        // Save filters
+        saveFilterState({
+          search: searchVal,
+          ref: refVal,
+          chap: chapVal,
+          type: typeVal,
+          year: yearVal,
+          quality: qualVal,
+          progress: progVal,
+          correctness: corrVal,
+          favorite: favVal,
+          last_index: currentIndex
+        });
+
+        filteredQuestions = allQuestions.filter(q => {
+          if (searchVal && !q.stem.toLowerCase().includes(searchVal)) return false;
+          if (refVal && q.reference !== refVal) return false;
+          if (chapVal && q.chapter !== chapVal) return false;
+          if (typeVal && q.exam_type !== typeVal) return false;
+          if (yearVal && q.exam_year !== yearVal) return false;
+          if (qualVal && q.quality !== qualVal) return false;
+          
+          const prog = userProgress[q.id];
+          if (progVal === "answered" && !prog) return false;
+          if (progVal === "unanswered" && prog) return false;
+          
+          if (progVal === "answered" && corrVal) {
+            if (corrVal === "correct" && !prog.correct) return false;
+            if (corrVal === "wrong" && prog.correct) return false;
+          }
+
+          if (favVal && (!prog || !prog.favorite)) return false;
+
+          return true;
+        });
+
+        if (resetIndex || currentIndex >= filteredQuestions.length) {
+          currentIndex = 0;
+        }
+
+        renderQuestionCard();
+      }
+
+      function renderQuestionCard() {
+        const cardArea = document.getElementById("card-area");
+        if (filteredQuestions.length === 0) {
+          cardArea.innerHTML = `
+            <div class="empty-results">
+              <svg width="48" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <div style="font-weight: 700; margin-top: 10px;">سؤالی با فیلترهای انتخاب شده یافت نشد.</div>
+            </div>
+          `;
+          return;
+        }
+
+        const q = filteredQuestions[currentIndex];
+        const prog = userProgress[q.id] || { selected: "", correct: null, favorite: false };
+        const isAnswered = !!prog.selected;
+
+        // Save last viewed question ID
+        const state = loadFilterState();
+        state.last_index = currentIndex;
+        saveFilterState(state);
+
+        const badgeQualityClass = q.quality === "complete" ? "quality-complete" : "quality-review";
+        const badgeQualityText = q.quality === "complete" ? "کامل" : "نیازمند بازبینی";
+
+        const favIcon = prog.favorite ? "★" : "☆";
+        const favLabel = prog.favorite ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها";
+
+        let optionsHtml = "";
+        const labels = ["الف", "ب", "ج", "د"];
+        labels.forEach(lbl => {
+          const optText = q.options[lbl];
+          if (!optText) return;
+
+          let btnClass = "option-button";
+          if (isAnswered) {
+            if (q.correct_option === lbl) {
+              btnClass += " correct";
+            } else if (prog.selected === lbl) {
+              btnClass += " wrong";
+            }
+          }
+
+          optionsHtml += `
+            <button class="${btnClass}" data-option="${lbl}" ${isAnswered ? "disabled" : ""} aria-label="گزینه ${lbl}: ${optText}">
+              <span class="option-label" aria-hidden="true">${lbl}</span>
+              <span class="option-text">${optText}</span>
+            </button>
+          `;
+        });
+
+        let feedbackHtml = "";
+        if (isAnswered) {
+          if (!q.correct_option) {
+            feedbackHtml = `
+              <div class="feedback-box warning" role="alert" aria-live="polite">
+                <div class="feedback-title">
+                  <span>⚠</span>
+                  <span>پاسخ صحیح این سؤال هنوز نیازمند بازبینی است.</span>
+                </div>
+              </div>
+            `;
+          } else if (prog.correct) {
+            feedbackHtml = `
+              <div class="feedback-box correct" role="alert" aria-live="polite">
+                <div class="feedback-title">
+                  <span>✓</span>
+                  <span>پاسخ شما صحیح است!</span>
+                </div>
+              </div>
+            `;
+          } else {
+            feedbackHtml = `
+              <div class="feedback-box wrong" role="alert" aria-live="polite">
+                <div class="feedback-title">
+                  <span>✗</span>
+                  <span>پاسخ شما نادرست است. پاسخ صحیح گزینه «${q.correct_option}» می‌باشد.</span>
+                </div>
+              </div>
+            `;
+          }
+
+          // Add explanation box if exists
+          if (q.explanation) {
+            feedbackHtml += `
+              <div class="q-explanation-container">
+                <h4 class="q-explanation-title">پاسخ تشریحی</h4>
+                <div class="q-explanation-text">${escapeHtml(q.explanation)}</div>
+              </div>
+            `;
+          }
+
+          // Add reference recap
+          const refText = q.reference ? q.reference : "نامشخص";
+          const chapText = q.chapter ? (isNaN(parseFloat(q.chapter)) ? q.chapter : `فصل ${toFaDigit(q.chapter)}`) : "نامشخص";
+          feedbackHtml += `
+            <div style="font-size:0.85rem; color:var(--c-muted); margin-top:14px; border-top:1px dashed var(--c-border); padding-top:10px;">
+              <strong>مرجع:</strong> ${refText} | <strong>فصل:</strong> ${chapText}
+            </div>
+          `;
+        }
+
+        let occurrencesHtml = "";
+        if (q.occurrences && q.occurrences.length > 0) {
+          const listItems = q.occurrences.map(o => {
+            const fName = o.source_file || "نامشخص";
+            const qNum = o.source_question_number ? `سؤال ${toFaDigit(o.source_question_number)}` : "";
+            const pageNum = o.source_page ? `صفحه ${toFaDigit(o.source_page)}` : "";
+            return `<li>${fName} ${qNum} ${pageNum}</li>`;
+          }).join("");
+
+          occurrencesHtml = `
+            <div class="q-occurrences">
+              <details>
+                <summary>منابع و محل‌های مشاهده سؤال</summary>
+                <ul class="q-occurrences-list">
+                  ${listItems}
+                </ul>
+              </details>
+            </div>
+          `;
+        }
+
+        // Render card
+        cardArea.innerHTML = `
+          <article class="q-card" aria-label="سوال ${toFaDigit(currentIndex + 1)}">
+            <div class="q-card-header">
+              <div class="q-meta-badges">
+                <span class="badge ${badgeQualityClass}">${badgeQualityText}</span>
+                <span class="badge">${q.exam_type || "نامشخص"}</span>
+                <span class="badge">سال ${toFaDigit(q.exam_year || "۱۴۰۳")}</span>
+                <span class="badge">${q.reference || "مرجع نامشخص"}</span>
+                <span class="badge">${q.chapter ? (isNaN(parseFloat(q.chapter)) ? q.chapter : `فصل ${toFaDigit(q.chapter)}`) : "فصل نامشخص"}</span>
+              </div>
+              <button class="q-favorite-btn" id="q-favorite-toggle" aria-label="${favLabel}" title="${favLabel}">
+                ${favIcon}
+              </button>
+            </div>
+            
+            <div class="q-card-body">
+              <div style="font-size:0.8rem; font-weight:bold; color:var(--c-muted); margin-bottom:10px;">
+                شناسه سؤال: ${q.id}
+              </div>
+              <h3 class="q-stem">${q.stem}</h3>
+              <div class="q-options-grid">
+                ${optionsHtml}
+              </div>
+              ${feedbackHtml}
+              ${occurrencesHtml}
+            </div>
+
+            <!-- Navigation inside card footer -->
+            <div class="nav-panel">
+              <button class="nav-btn" id="nav-btn-prev" ${currentIndex === 0 ? "disabled" : ""} aria-label="سؤال قبلی">
+                ← قبلی
+              </button>
+              
+              <div class="nav-stats">
+                سؤال ${toFaDigit(currentIndex + 1)} از ${toFaDigit(filteredQuestions.length)}
+              </div>
+
+              <div class="jump-group">
+                <label for="nav-jump-select">برو به:</label>
+                <select id="nav-jump-select" class="jump-select"></select>
+              </div>
+
+              <button class="nav-btn" id="nav-btn-next" ${currentIndex === filteredQuestions.length - 1 ? "disabled" : ""} aria-label="سؤال بعدی">
+                بعدی →
+              </button>
+            </div>
+          </article>
+        `;
+
+        // Event listeners on buttons
+        document.getElementById("nav-btn-prev").addEventListener("click", () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            renderQuestionCard();
+          }
+        });
+
+        document.getElementById("nav-btn-next").addEventListener("click", () => {
+          if (currentIndex < filteredQuestions.length - 1) {
+            currentIndex++;
+            renderQuestionCard();
+          }
+        });
+
+        const jumpSel = document.getElementById("nav-jump-select");
+        filteredQuestions.forEach((fq, idx) => {
+          const opt = document.createElement("option");
+          opt.value = idx;
+          opt.textContent = toFaDigit(idx + 1);
+          if (idx === currentIndex) opt.selected = true;
+          jumpSel.appendChild(opt);
+        });
+
+        jumpSel.addEventListener("change", (e) => {
+          currentIndex = parseInt(e.target.value);
+          renderQuestionCard();
+        });
+
+        document.getElementById("q-favorite-toggle").addEventListener("click", () => {
+          if (!userProgress[q.id]) {
+            userProgress[q.id] = { selected: "", correct: null, favorite: false };
+          }
+          userProgress[q.id].favorite = !userProgress[q.id].favorite;
+          
+          // clean empty records
+          if (!userProgress[q.id].selected && !userProgress[q.id].favorite) {
+            delete userProgress[q.id];
+          }
+          
+          saveUserProgress();
+          renderQuestionCard();
+        });
+
+        const optButtons = cardArea.querySelectorAll(".option-button");
+        optButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            if (isAnswered) return;
+            const optVal = btn.getAttribute("data-option");
+            
+            const isCorrect = q.correct_option ? (optVal === q.correct_option) : null;
+            
+            if (!userProgress[q.id]) {
+              userProgress[q.id] = { selected: "", correct: null, favorite: false };
+            }
+            userProgress[q.id].selected = optVal;
+            userProgress[q.id].correct = isCorrect;
+            
+            saveUserProgress();
+            renderQuestionCard();
+          });
+        });
+      }
+
+      // Utils
+      function toFaDigit(n) {
+        if (n == null) return "";
+        return String(n).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Initialize on load
+      window.addEventListener("DOMContentLoaded", init);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>پنل مدیریت بانک سؤالات</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+  <style>
+    :root {
+      --c-page: #f8fafc;
+      --c-surface: #ffffff;
+      --c-text: #0f172a;
+      --c-muted: #64748b;
+      --c-border: #cbd5e1;
+      --c-primary: #1e293b;
+      --c-blue: #3b82f6;
+      --c-blue-bg: #eff6ff;
+      --c-green: #10b981;
+      --c-green-bg: #ecfdf5;
+      --c-red: #ef4444;
+      --c-red-bg: #fef2f2;
+      --c-warning: #f59e0b;
+      --c-warning-bg: #fffbeb;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      background-color: var(--c-page);
+      color: var(--c-text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Warning Header Banner */
+    .admin-alert-banner {
+      background-color: var(--c-warning-bg);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #78350f;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-card);
+    }
+
+    header.admin-header {
+      background-color: var(--c-primary);
+      color: white;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    header.admin-header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    /* Stats bar */
+    .admin-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .admin-stat-card {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .admin-stat-card .val {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--c-primary);
+    }
+
+    .admin-stat-card .lbl {
+      font-size: 0.75rem;
+      color: var(--c-muted);
+      font-weight: 600;
+    }
+
+    /* Master Detail Layout */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr 340px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 1200px) {
+      .admin-grid {
+        grid-template-columns: 320px 1fr;
+      }
+      .panel-io {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+      .panel-io {
+        grid-column: span 1;
+      }
+    }
+
+    /* Shared Card/Panel style */
+    .panel-card {
+      background-color: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-title {
+      background-color: #f1f5f9;
+      border-bottom: 1px solid var(--c-border);
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--c-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* List Column */
+    .list-wrapper {
+      max-height: 700px;
+      overflow-y: auto;
+    }
+
+    .list-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--c-border);
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: background-color 0.15s;
+    }
+
+    .list-item:hover {
+      background-color: var(--c-page);
+    }
+
+    .list-item.active {
+      background-color: var(--c-blue-bg);
+      border-right: 4px solid var(--c-blue);
+    }
+
+    .list-item-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .list-item-snippet {
+      color: var(--c-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .list-item-status {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .badge-status {
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .badge-status.complete { background-color: var(--c-green-bg); color: var(--c-green); }
+    .badge-status.review { background-color: var(--c-warning-bg); color: var(--c-warning); }
+    .badge-status.dirty { background-color: var(--c-blue-bg); color: var(--c-blue); }
+
+    /* Admin Filters Form inside Left Sidebar */
+    .admin-filters {
+      padding: 12px;
+      border-bottom: 1px solid var(--c-border);
+      background-color: #f8fafc;
+    }
+
+    .admin-filter-control {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    /* Edit Form */
+    .edit-form-body {
+      padding: 16px;
+      max-height: 700px;
+      overflow-y: auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.85rem;
+      background-color: white;
+    }
+
+    .form-input:focus {
+      border-color: var(--c-blue);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+    }
+
+    .form-input.warning-id {
+      border-color: var(--c-red);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-actions {
+      border-top: 1px solid var(--c-border);
+      padding: 12px 16px;
+      background-color: #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 0.15s;
+    }
+
+    .btn-primary { background-color: var(--c-blue); color: white; }
+    .btn-primary:hover { background-color: #2563eb; }
+    .btn-secondary { background-color: #cbd5e1; color: var(--c-primary); }
+    .btn-secondary:hover { background-color: #94a3b8; }
+    .btn-danger { background-color: var(--c-red); color: white; }
+    .btn-danger:hover { background-color: #dc2626; }
+    .btn-green { background-color: var(--c-green); color: white; }
+    .btn-green:hover { background-color: #059669; }
+
+    /* Right/IO Column */
+    .panel-io-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .io-section {
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+
+    .io-section-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--c-primary);
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-input-wrapper input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .btn-file-select {
+      width: 100%;
+      text-align: center;
+      padding: 8px;
+      background-color: var(--c-page);
+      border: 1px dashed var(--c-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-file-select:hover {
+      background-color: var(--c-blue-bg);
+      border-color: var(--c-blue);
+    }
+
+    .io-btn-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    /* Logs console */
+    .log-terminal {
+      background-color: #0f172a;
+      color: #38bdf8;
+      font-family: monospace;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      max-height: 120px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="admin-alert-banner">
+      <span>⚠</span>
+      <span>این پنل به‌صورت محلی در مرورگر کار می‌کند. تغییرات تا زمان خروجی‌گرفتن (Export) و جایگزینی فایل در ریپوزیتوری، روی وب‌سایت عمومی ذخیره نمی‌شوند.</span>
+    </div>
+
+    <header class="admin-header">
+      <h1>پنل مدیریت بانک سؤالات (GynQB)</h1>
+      <div style="display:flex; gap:8px;">
+        <a href="index.html" class="btn btn-secondary" style="text-decoration:none; display:inline-block; line-height:1.2;">← رفتن به سایت اصلی</a>
+      </div>
+    </header>
+
+    <!-- Stat Grid -->
+    <div class="admin-stats-bar">
+      <div class="admin-stat-card">
+        <div class="val" id="stat-all">—</div>
+        <div class="lbl">کل سؤال‌ها</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-comp">—</div>
+        <div class="lbl">کامل (Complete)</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-rev">—</div>
+        <div class="lbl">نیازمند بازبینی</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-empty-ans">—</div>
+        <div class="lbl">پاسخ خالی</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-inc-opts">—</div>
+        <div class="lbl">گزینه ناقص (&lt;4)</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-empty-exp">—</div>
+        <div class="lbl">توضیح خالی</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="val" id="stat-modified">—</div>
+        <div class="lbl">ویرایش‌شده (Draft)</div>
+      </div>
+    </div>
+
+    <!-- Admin Master Detail Grid -->
+    <div class="admin-grid">
+      <!-- Left Column: Search & Filter List -->
+      <section class="panel-card" aria-label="فهرست و فیلتر سوالات">
+        <div class="panel-title">
+          <span>فهرست سؤالات</span>
+          <span id="filtered-count-lbl" style="font-size:0.75rem; color:var(--c-muted);">—</span>
+        </div>
+        
+        <div class="admin-filters">
+          <input type="text" id="admin-filter-id" class="admin-filter-control" placeholder="جستجو بر اساس شناسه..." />
+          <input type="text" id="admin-filter-stem" class="admin-filter-control" placeholder="جستجو در متن سؤال..." />
+          
+          <select id="admin-filter-qual" class="admin-filter-control">
+            <option value="">همه کیفیت‌ها</option>
+            <option value="complete">فقط کامل (Complete)</option>
+            <option value="needs_review" selected>نیازمند بازبینی (Needs Review)</option>
+          </select>
+
+          <select id="admin-filter-defect" class="admin-filter-control">
+            <option value="">همه رکوردها (بدون فیلتر نقص)</option>
+            <option value="empty_ans">پاسخ صحیح خالی</option>
+            <option value="inc_opts">کمتر از ۴ گزینه</option>
+            <option value="empty_exp">توضیح خالی</option>
+            <option value="empty_ref">رفرنس خالی</option>
+            <option value="empty_chap">فصل خالی</option>
+            <option value="modified_only">فقط ویرایش شده‌ها</option>
+          </select>
+
+          <select id="admin-filter-ref" class="admin-filter-control">
+            <option value="">همه مراجع</option>
+          </select>
+          
+          <select id="admin-filter-type" class="admin-filter-control">
+            <option value="">همه آزمون‌ها</option>
+          </select>
+
+          <select id="admin-filter-year" class="admin-filter-control">
+            <option value="">همه سال‌ها</option>
+          </select>
+        </div>
+
+        <div class="list-wrapper" id="questions-list">
+          <div style="padding:20px; text-align:center; color:var(--c-muted);">در حال بارگذاری...</div>
+        </div>
+      </section>
+
+      <!-- Center Column: Edit Form -->
+      <section class="panel-card" aria-label="فرم ویرایش">
+        <div class="panel-title" id="edit-panel-title">
+          <span>فرم ویرایش سؤال</span>
+        </div>
+        
+        <div class="edit-form-body" id="edit-form-container">
+          <div style="padding:40px; text-align:center; color:var(--c-muted);">یک سؤال را از فهرست سمت چپ انتخاب کنید.</div>
+        </div>
+
+        <div class="form-actions" id="edit-form-actions" style="display:none;">
+          <button class="btn btn-secondary" id="btn-cancel-edit">انصراف</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" id="btn-reset-edit" title="بازگردانی به مقادیر پیش‌فرض دیتابیس">ریست رکورد</button>
+            <button class="btn btn-primary" id="btn-save-edit">ذخیره موقت</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Import / Export / Draft Console -->
+      <section class="panel-card panel-io" aria-label="عملیات و پیش‌نویس">
+        <div class="panel-title">پیش‌نویس و خروجی</div>
+        
+        <div class="panel-io-body">
+          <!-- Draft storage -->
+          <div class="io-section">
+            <h3 class="io-section-title">مدیریت پیش‌نویس (localStorage)</h3>
+            <div class="io-btn-grid">
+              <button class="btn btn-primary" id="btn-save-draft">ذخیره پیش‌نویس به سرور مرورگر</button>
+              <button class="btn btn-secondary" id="btn-restore-draft">بازیابی پیش‌نویس ذخیره‌شده</button>
+              <button class="btn btn-danger" id="btn-clear-draft">حذف پیش‌نویس</button>
+            </div>
+          </div>
+
+          <!-- Data Import -->
+          <div class="io-section">
+            <h3 class="io-section-title">بارگذاری داده جدید (Import)</h3>
+            <div class="file-input-wrapper">
+              <button class="btn-file-select">انتخاب فایل JSON یا JSONL</button>
+              <input type="file" id="import-file" accept=".json,.jsonl" />
+            </div>
+            <div style="font-size:0.7rem; color:var(--c-muted); margin-top:4px;">
+              فایل‌ها خودکار از A/B/C/D به الف/ب/ج/د نگاشت خواهند شد.
+            </div>
+          </div>
+
+          <!-- Data Export -->
+          <div class="io-section">
+            <h3 class="io-section-title">خروجی اصلاحات (Export)</h3>
+            <div class="io-btn-grid">
+              <button class="btn btn-green" id="btn-export-json">دانلود فایل JSON نهایی</button>
+              <button class="btn btn-green" id="btn-export-jsonl">دانلود فایل JSONL نهایی</button>
+              <button class="btn btn-primary" id="btn-fs-save" style="display:none;">ذخیره مستقیم در فایل...</button>
+            </div>
+          </div>
+
+          <!-- Logs -->
+          <div class="io-section" style="flex-grow:1; display:flex; flex-direction:column;">
+            <h3 class="io-section-title">گزارش وضعیت</h3>
+            <div class="log-terminal" id="admin-logs">آماده به کار.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const DRAFT_KEY = "gynqb-admin-draft-v1";
+      const FILE_VERSION = 1;
+
+      let rawDb = [];          // Original questions loaded
+      let db = [];             // Current working questions (with edits)
+      let modifiedIds = new Set(); // Modified question IDs
+      let activeQ = null;      // Currently active question being edited
+      let hasUnsavedChanges = false;
+
+      // Logs helper
+      function log(msg, type = "info") {
+        const consoleEl = document.getElementById("admin-logs");
+        const timestamp = new Date().toLocaleTimeString("fa-IR");
+        consoleEl.innerText += `\n[${timestamp}] [${type.toUpperCase()}] ${msg}`;
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+      }
+
+      // Initialize
+      function init() {
+        // Load default questions
+        fetch("./questions.json")
+          .then(res => {
+            if (!res.ok) throw new Error("questions.json یافت نشد.");
+            return res.json();
+          })
+          .then(data => {
+            const list = data.questions || [];
+            rawDb = JSON.parse(JSON.stringify(list)); // deep copy
+            db = JSON.parse(JSON.stringify(list));
+            log(`با موفقیت ${db.length} سؤال پیش‌فرض لود شد.`);
+            
+            // Check if draft exists and restore
+            if (localStorage.getItem(DRAFT_KEY)) {
+              log("پیش‌نویس ذخیره‌شده پیدا شد. می‌توانید از دکمه بازیابی استفاده کنید.", "warning");
+            }
+
+            setupControls();
+            populateFilterOptions();
+            filterAndRenderList();
+            calculateStats();
+          })
+          .catch(err => {
+            log(`خطا در لود پیش‌فرض: ${err.message}`, "error");
+          });
+
+        // Browser support for File System Access API
+        if ("showSaveFilePicker" in window) {
+          document.getElementById("btn-fs-save").style.display = "block";
+        }
+
+        // Warning on leave
+        window.addEventListener("beforeunload", (e) => {
+          if (hasUnsavedChanges) {
+            e.preventDefault();
+            e.returnValue = "تغییرات ذخیره نشده دارید. آیا مطمئنید؟";
+          }
+        });
+      }
+
+      function calculateStats() {
+        const total = db.length;
+        const complete = db.filter(q => q.quality === "complete").length;
+        const review = db.filter(q => q.quality === "needs_review").length;
+        
+        let emptyAns = 0;
+        let incOpts = 0;
+        let emptyExp = 0;
+
+        db.forEach(q => {
+          if (!q.correct_option) emptyAns++;
+          const optCount = Object.values(q.options || {}).filter(v => v.trim()).length;
+          if (optCount < 4) incOpts++;
+          if (!q.explanation || !q.explanation.trim()) emptyExp++;
+        });
+
+        document.getElementById("stat-all").textContent = toFaDigit(total);
+        document.getElementById("stat-comp").textContent = toFaDigit(complete);
+        document.getElementById("stat-rev").textContent = toFaDigit(review);
+        document.getElementById("stat-empty-ans").textContent = toFaDigit(emptyAns);
+        document.getElementById("stat-inc-opts").textContent = toFaDigit(incOpts);
+        document.getElementById("stat-empty-exp").textContent = toFaDigit(emptyExp);
+        document.getElementById("stat-modified").textContent = toFaDigit(modifiedIds.size);
+      }
+
+      function populateFilterOptions() {
+        const refs = new Set();
+        const types = new Set();
+        const years = new Set();
+
+        db.forEach(q => {
+          if (q.reference) refs.add(q.reference);
+          if (q.exam_type) types.add(q.exam_type);
+          if (q.exam_year) years.add(q.exam_year);
+        });
+
+        const refSel = document.getElementById("admin-filter-ref");
+        refSel.innerHTML = '<option value="">همه مراجع</option>';
+        Array.from(refs).sort().forEach(r => {
+          const opt = document.createElement("option");
+          opt.value = r;
+          opt.textContent = r;
+          refSel.appendChild(opt);
+        });
+
+        const typeSel = document.getElementById("admin-filter-type");
+        typeSel.innerHTML = '<option value="">همه آزمون‌ها</option>';
+        Array.from(types).sort().forEach(t => {
+          const opt = document.createElement("option");
+          opt.value = t;
+          opt.textContent = t;
+          typeSel.appendChild(opt);
+        });
+
+        const yearSel = document.getElementById("admin-filter-year");
+        yearSel.innerHTML = '<option value="">همه سال‌ها</option>';
+        Array.from(years).sort().forEach(y => {
+          const opt = document.createElement("option");
+          opt.value = y;
+          opt.textContent = toFaDigit(y);
+          yearSel.appendChild(opt);
+        });
+      }
+
+      function filterAndRenderList() {
+        const filterId = document.getElementById("admin-filter-id").value.trim().toLowerCase();
+        const filterStem = document.getElementById("admin-filter-stem").value.trim().toLowerCase();
+        const filterQual = document.getElementById("admin-filter-qual").value;
+        const filterDefect = document.getElementById("admin-filter-defect").value;
+        const filterRef = document.getElementById("admin-filter-ref").value;
+        const filterType = document.getElementById("admin-filter-type").value;
+        const filterYear = document.getElementById("admin-filter-year").value;
+
+        const filtered = db.filter(q => {
+          if (filterId && !q.id.toLowerCase().includes(filterId)) return false;
+          if (filterStem && !q.stem.toLowerCase().includes(filterStem)) return false;
+          if (filterQual && q.quality !== filterQual) return false;
+          
+          if (filterDefect) {
+            if (filterDefect === "empty_ans" && q.correct_option) return false;
+            if (filterDefect === "inc_opts") {
+              const optCount = Object.values(q.options || {}).filter(v => v.trim()).length;
+              if (optCount >= 4) return false;
+            }
+            if (filterDefect === "empty_exp" && q.explanation && q.explanation.trim()) return false;
+            if (filterDefect === "empty_ref" && q.reference) return false;
+            if (filterDefect === "empty_chap" && q.chapter) return false;
+            if (filterDefect === "modified_only" && !modifiedIds.has(q.id)) return false;
+          }
+
+          if (filterRef && q.reference !== filterRef) return false;
+          if (filterType && q.exam_type !== filterType) return false;
+          if (filterYear && q.exam_year !== filterYear) return false;
+
+          return true;
+        });
+
+        document.getElementById("filtered-count-lbl").textContent = `${toFaDigit(filtered.length)} مورد`;
+
+        const listEl = document.getElementById("questions-list");
+        if (filtered.length === 0) {
+          listEl.innerHTML = '<div style="padding:20px; text-align:center; color:var(--c-muted);">سؤالی یافت نشد.</div>';
+          return;
+        }
+
+        listEl.innerHTML = filtered.map(q => {
+          const isActive = activeQ && activeQ.id === q.id ? "active" : "";
+          const qualityBadge = q.quality === "complete" 
+            ? '<span class="badge-status complete">کامل</span>' 
+            : '<span class="badge-status review">بازبینی</span>';
+          const draftBadge = modifiedIds.has(q.id) 
+            ? '<span class="badge-status dirty">ویرایش شده</span>' 
+            : "";
+          
+          return `
+            <div class="list-item ${isActive}" data-id="${q.id}">
+              <div class="list-item-header">
+                <span>${q.id}</span>
+                <span>${toFaDigit(q.exam_year || "۱۴۰۳")}</span>
+              </div>
+              <div class="list-item-snippet">${escapeHtml(q.stem)}</div>
+              <div class="list-item-status">
+                ${qualityBadge}
+                ${draftBadge}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        // Add click events
+        listEl.querySelectorAll(".list-item").forEach(item => {
+          item.addEventListener("click", () => {
+            const qid = item.getAttribute("data-id");
+            selectQuestion(qid);
+          });
+        });
+      }
+
+      function selectQuestion(id) {
+        // Check unsaved
+        if (hasUnsavedChanges && !confirm("تغییرات ذخیره نشده برای سؤال فعلی دارید. آیا مایل به ترک بدون ذخیره هستید؟")) {
+          return;
+        }
+
+        activeQ = db.find(q => q.id === id);
+        hasUnsavedChanges = false;
+        
+        // Update list active classes
+        document.querySelectorAll(".list-item").forEach(item => {
+          if (item.getAttribute("data-id") === id) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+
+        renderEditForm();
+      }
+
+      function renderEditForm() {
+        const container = document.getElementById("edit-form-container");
+        const actions = document.getElementById("edit-form-actions");
+        
+        if (!activeQ) {
+          container.innerHTML = '<div style="padding:40px; text-align:center; color:var(--c-muted);">یک سؤال را از فهرست سمت چپ انتخاب کنید.</div>';
+          actions.style.display = "none";
+          return;
+        }
+
+        actions.style.display = "flex";
+        document.getElementById("edit-panel-title").innerHTML = `<span>ویرایش سؤال: ${activeQ.id}</span>`;
+
+        container.innerHTML = `
+          <div class="form-group full-width">
+            <label for="form-id">شناسه سؤال (تغییر شناسه با احتیاط بالا!)</label>
+            <input type="text" id="form-id" class="form-input" value="${activeQ.id}" />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="form-stem">صورت سؤال</label>
+            <textarea id="form-stem" class="form-input">${escapeHtml(activeQ.stem)}</textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-opt-a">گزینه الف</label>
+              <input type="text" id="form-opt-a" class="form-input" value="${escapeHtml(activeQ.options["الف"] || "")}" />
+            </div>
+            <div class="form-group">
+              <label for="form-opt-b">گزینه ب</label>
+              <input type="text" id="form-opt-b" class="form-input" value="${escapeHtml(activeQ.options["ب"] || "")}" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-opt-c">گزینه ج</label>
+              <input type="text" id="form-opt-c" class="form-input" value="${escapeHtml(activeQ.options["ج"] || "")}" />
+            </div>
+            <div class="form-group">
+              <label for="form-opt-d">گزینه د</label>
+              <input type="text" id="form-opt-d" class="form-input" value="${escapeHtml(activeQ.options["د"] || "")}" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-correct">پاسخ صحیح</label>
+              <select id="form-correct" class="form-input">
+                <option value="">پاسخ نامشخص (نیاز به بازبینی)</option>
+                <option value="الف" ${activeQ.correct_option === "الف" ? "selected" : ""}>گزینه الف</option>
+                <option value="ب" ${activeQ.correct_option === "ب" ? "selected" : ""}>گزینه ب</option>
+                <option value="ج" ${activeQ.correct_option === "ج" ? "selected" : ""}>گزینه ج</option>
+                <option value="د" ${activeQ.correct_option === "د" ? "selected" : ""}>گزینه د</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="form-quality">کیفیت داده</label>
+              <select id="form-quality" class="form-input">
+                <option value="complete" ${activeQ.quality === "complete" ? "selected" : ""}>کامل (Complete)</option>
+                <option value="needs_review" ${activeQ.quality === "needs_review" ? "selected" : ""}>نیازمند بازبینی (Needs Review)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="form-exp">پاسخ تشریحی (توضیح بالینی)</label>
+            <textarea id="form-exp" class="form-input" style="min-height:140px;">${escapeHtml(activeQ.explanation || "")}</textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-ref">مرجع (کتاب)</label>
+              <input type="text" id="form-ref" class="form-input" value="${escapeHtml(activeQ.reference || "")}" placeholder="مثال: Williams Obstetrics" />
+            </div>
+            <div class="form-group">
+              <label for="form-chap">فصل دقیق مرجع</label>
+              <input type="text" id="form-chap" class="form-input" value="${escapeHtml(activeQ.chapter || "")}" placeholder="مثال: 14" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-type">نوع آزمون</label>
+              <input type="text" id="form-type" class="form-input" value="${escapeHtml(activeQ.exam_type || "")}" placeholder="مثال: بورد / ارتقا" />
+            </div>
+            <div class="form-group">
+              <label for="form-year">سال آزمون</label>
+              <input type="text" id="form-year" class="form-input" value="${escapeHtml(activeQ.exam_year || "")}" placeholder="مثال: 1402" />
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="form-occurrences">منابع مبدأ و آدرس‌ها (Occurrences JSON)</label>
+            <textarea id="form-occurrences" class="form-input" style="font-family:monospace; font-size:0.75rem; min-height:80px; direction:ltr; text-align:left;">${JSON.stringify(activeQ.occurrences || [], null, 2)}</textarea>
+          </div>
+        `;
+
+        // Watch inputs for modifications
+        const inputs = container.querySelectorAll(".form-input");
+        inputs.forEach(inp => {
+          inp.addEventListener("input", () => {
+            hasUnsavedChanges = true;
+          });
+        });
+
+        // Trigger warning on ID change
+        document.getElementById("form-id").addEventListener("change", (e) => {
+          const val = e.target.value.trim();
+          if (val !== activeQ.id) {
+            e.target.classList.add("warning-id");
+            alert("توجه: تغییر شناسه سؤال باعث ساخت سؤال جدید با این شناسه و حذف شناسه قدیمی خواهد شد. این کار را با احتیاط بالا انجام دهید!");
+          } else {
+            e.target.classList.remove("warning-id");
+          }
+        });
+      }
+
+      function setupControls() {
+        // Form Buttons
+        document.getElementById("btn-cancel-edit").addEventListener("click", () => {
+          if (!hasUnsavedChanges || confirm("آیا مایل به لغو تغییرات هستید؟")) {
+            hasUnsavedChanges = false;
+            renderEditForm();
+          }
+        });
+
+        document.getElementById("btn-reset-edit").addEventListener("click", () => {
+          if (!activeQ) return;
+          if (confirm("آیا مایل به بازگردانی این سؤال به مقادیر خام دیتابیس هستید؟")) {
+            const orig = rawDb.find(q => q.id === activeQ.id);
+            if (orig) {
+              const idx = db.findIndex(q => q.id === activeQ.id);
+              db[idx] = JSON.parse(JSON.stringify(orig));
+              modifiedIds.delete(activeQ.id);
+              hasUnsavedChanges = false;
+              selectQuestion(activeQ.id);
+              filterAndRenderList();
+              calculateStats();
+              log(`سؤال ${activeQ.id} ریست شد.`);
+            } else {
+              log("نسخه اولیه این سؤال در دیتابیس اصلی یافت نشد.", "error");
+            }
+          }
+        });
+
+        document.getElementById("btn-save-edit").addEventListener("click", () => {
+          if (!activeQ) return;
+
+          const formId = document.getElementById("form-id").value.trim();
+          const formStem = document.getElementById("form-stem").value.trim();
+          const optA = document.getElementById("form-opt-a").value.trim();
+          const optB = document.getElementById("form-opt-b").value.trim();
+          const optC = document.getElementById("form-opt-c").value.trim();
+          const optD = document.getElementById("form-opt-d").value.trim();
+          const formCorrect = document.getElementById("form-correct").value;
+          const formQuality = document.getElementById("form-quality").value;
+          const formExp = document.getElementById("form-exp").value.trim();
+          const formRef = document.getElementById("form-ref").value.trim();
+          const formChap = document.getElementById("form-chap").value.trim();
+          const formType = document.getElementById("form-type").value.trim();
+          const formYear = document.getElementById("form-year").value.trim();
+          
+          let occurrences = [];
+          try {
+            occurrences = JSON.parse(document.getElementById("form-occurrences").value);
+          } catch (e) {
+            alert("خطا در قالب فیلد Occurrences! لطفاً قالب آرایه JSON معتبر را رعایت کنید.");
+            return;
+          }
+
+          // Validation
+          if (!formId) {
+            alert("شناسه سؤال نباید خالی باشد.");
+            return;
+          }
+
+          if (formId !== activeQ.id) {
+            // Check duplicate ID
+            const duplicate = db.find(q => q.id === formId);
+            if (duplicate) {
+              alert("این شناسه سؤال قبلاً توسط سؤال دیگری رزرو شده است. شناسه یکتا وارد کنید.");
+              return;
+            }
+          }
+
+          // Save changes back to our memory db array
+          const idx = db.findIndex(q => q.id === activeQ.id);
+          
+          const updated = {
+            id: formId,
+            stem: formStem,
+            options: {
+              "الف": optA,
+              "ب": optB,
+              "ج": optC,
+              "د": optD
+            },
+            correct_option: formCorrect,
+            explanation: formExp,
+            exam_type: formType,
+            exam_year: formYear,
+            reference: formRef,
+            chapter: formChap,
+            occurrences: occurrences,
+            quality: formQuality
+          };
+
+          db[idx] = updated;
+          
+          if (formId !== activeQ.id) {
+            modifiedIds.delete(activeQ.id);
+            activeQ.id = formId; // update pointer
+          }
+
+          modifiedIds.add(formId);
+          hasUnsavedChanges = false;
+          
+          log(`سؤال ${formId} موقتاً ویرایش شد. تغییرات برای انتشار نهایی نیاز به Export دارند.`);
+          
+          // Re-render
+          calculateStats();
+          filterAndRenderList();
+          selectQuestion(formId);
+        });
+
+        // Sidebar filters
+        document.getElementById("admin-filter-id").addEventListener("input", filterAndRenderList);
+        document.getElementById("admin-filter-stem").addEventListener("input", filterAndRenderList);
+        document.getElementById("admin-filter-qual").addEventListener("change", filterAndRenderList);
+        document.getElementById("admin-filter-defect").addEventListener("change", filterAndRenderList);
+        document.getElementById("admin-filter-ref").addEventListener("change", filterAndRenderList);
+        document.getElementById("admin-filter-type").addEventListener("change", filterAndRenderList);
+        document.getElementById("admin-filter-year").addEventListener("change", filterAndRenderList);
+
+        // IO Draft management
+        document.getElementById("btn-save-draft").addEventListener("click", () => {
+          try {
+            const draft = {
+              version: FILE_VERSION,
+              exported_at: new Date().toISOString(),
+              modified_ids: Array.from(modifiedIds),
+              questions: db
+            };
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+            log("پیش‌نویس با موفقیت در فضای محلی مرورگر ذخیره شد.");
+          } catch (e) {
+            log(`خطا در ذخیره پیش‌نویس: ${e.message}`, "error");
+          }
+        });
+
+        document.getElementById("btn-restore-draft").addEventListener("click", () => {
+          try {
+            const rawDraft = localStorage.getItem(DRAFT_KEY);
+            if (!rawDraft) {
+              log("هیچ پیش‌نویسی در مرورگر شما ذخیره نشده است.", "error");
+              return;
+            }
+            const draft = JSON.parse(rawDraft);
+            db = draft.questions || [];
+            modifiedIds = new Set(draft.modified_ids || []);
+            activeQ = null;
+            
+            calculateStats();
+            populateFilterOptions();
+            filterAndRenderList();
+            renderEditForm();
+            log(`با موفقیت پیش‌نویس بازیابی شد. (${modifiedIds.size} سؤال اصلاح‌شده)`);
+          } catch (e) {
+            log(`خطا در بازیابی پیش‌نویس: ${e.message}`, "error");
+          }
+        });
+
+        document.getElementById("btn-clear-draft").addEventListener("click", () => {
+          if (confirm("آیا مایل به حذف کامل پیش‌نویس ذخیره‌شده هستید؟")) {
+            localStorage.removeItem(DRAFT_KEY);
+            log("پیش‌نویس با موفقیت حذف شد.");
+          }
+        });
+
+        // IO Import file
+        document.getElementById("import-file").addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            try {
+              const text = event.target.result;
+              let importedList = [];
+
+              if (file.name.endsWith(".jsonl")) {
+                importedList = parseJSONL(text);
+              } else {
+                const parsed = JSON.parse(text);
+                importedList = parsed.questions || parsed;
+                if (!Array.isArray(importedList)) {
+                  throw new Error("قالب فایل معتبر نیست. آرایه سؤالات یافت نشد.");
+                }
+              }
+
+              // Map and merge imported questions
+              let importCount = 0;
+              let errorCount = 0;
+
+              importedList.forEach((q, idx) => {
+                const qid = q.id || q.question_id;
+                if (!qid) {
+                  errorCount++;
+                  return;
+                }
+
+                // Normalization A/B/C/D -> الف/ب/ج/د
+                let opts = {};
+                if (q.options) {
+                  opts["الف"] = q.options["الف"] || q.options["A"] || q.options["a"] || "";
+                  opts["ب"] = q.options["ب"] || q.options["B"] || q.options["b"] || "";
+                  opts["ج"] = q.options["ج"] || q.options["C"] || q.options["c"] || "";
+                  opts["د"] = q.options["د"] || q.options["D"] || q.options["d"] || "";
+                }
+
+                // Normalizing correct answer
+                let corr = q.correct_option || q.answer || "";
+                if (corr === "A" || corr === "a" || corr === "1" || corr === "۱") corr = "الف";
+                if (corr === "B" || corr === "b" || corr === "2" || corr === "۲") corr = "ب";
+                if (corr === "C" || corr === "c" || corr === "3" || corr === "۳") corr = "ج";
+                if (corr === "D" || corr === "d" || corr === "4" || corr === "۴") corr = "د";
+
+                const normQ = {
+                  id: String(qid).strip ? String(qid).strip() : String(qid),
+                  stem: q.stem || "",
+                  options: opts,
+                  correct_option: corr,
+                  explanation: q.explanation || q.answer_excerpt || "",
+                  exam_type: q.exam_type || "",
+                  exam_year: q.exam_year || q.year || "",
+                  reference: q.reference || q.source_book || q.book_fa || "",
+                  chapter: q.chapter || "",
+                  occurrences: q.occurrences || [],
+                  quality: q.quality || "needs_review"
+                };
+
+                // Merge into DB
+                const existingIdx = db.findIndex(existQ => existQ.id === normQ.id);
+                if (existingIdx !== -1) {
+                  db[existingIdx] = normQ;
+                  modifiedIds.add(normQ.id);
+                  importCount++;
+                } else {
+                  db.push(normQ);
+                  modifiedIds.add(normQ.id);
+                  importCount++;
+                }
+              });
+
+              log(`با موفقیت ${importCount} سؤال از فایل ${file.name} وارد شد.`);
+              if (errorCount > 0) {
+                log(`تعداد ${errorCount} رکورد به علت نداشتن شناسه رد شدند.`, "error");
+              }
+
+              calculateStats();
+              populateFilterOptions();
+              filterAndRenderList();
+              renderEditForm();
+
+            } catch (err) {
+              log(`خطا در بارگذاری فایل: ${err.message}`, "error");
+              alert(`خطا در خواندن فایل:\n${err.message}`);
+            }
+          };
+          reader.readAsText(file);
+        });
+
+        // Exports
+        document.getElementById("btn-export-json").addEventListener("click", () => {
+          const exportData = {
+            meta: {
+              title: "بانک سؤالات زنان و زایمان",
+              version: FILE_VERSION,
+              total_questions: db.length,
+              generated_at: new Date().toISOString(),
+              source: "browser-admin-panel",
+              schema_version: "1.0"
+            },
+            questions: db
+          };
+          downloadFile(JSON.stringify(exportData, null, 2), "gynqb-questions-updated.json", "application/json");
+        });
+
+        document.getElementById("btn-export-jsonl").addEventListener("click", () => {
+          const lines = db.map(q => JSON.stringify(q)).join("\n");
+          downloadFile(lines, "gynqb-questions-updated.jsonl", "text/plain");
+        });
+
+        // Save picker (File System Access API)
+        const fsSaveBtn = document.getElementById("btn-fs-save");
+        fsSaveBtn.addEventListener("click", async () => {
+          try {
+            const exportData = {
+              meta: {
+                title: "بانک سؤالات زنان و زایمان",
+                version: FILE_VERSION,
+                total_questions: db.length,
+                generated_at: new Date().toISOString(),
+                source: "browser-admin-panel",
+                schema_version: "1.0"
+              },
+              questions: db
+            };
+            
+            const options = {
+              suggestedName: "questions.json",
+              types: [{
+                description: "JSON files",
+                accept: { "application/json": [".json"] }
+              }]
+            };
+
+            const handle = await window.showSaveFilePicker(options);
+            const writable = await handle.createWritable();
+            await writable.write(JSON.stringify(exportData, null, 2));
+            await writable.close();
+            
+            log("فایل با موفقیت به صورت مستقیم در مقصد انتخاب شده ذخیره شد.");
+          } catch (e) {
+            if (e.name !== "AbortError") {
+              log(`خطا در ذخیره مستقیم فایل: ${e.message}`, "error");
+            }
+          }
+        });
+      }
+
+      function parseJSONL(text) {
+        const lines = text.split("\n");
+        const list = [];
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line) continue;
+          try {
+            list.push(JSON.parse(line));
+          } catch (e) {
+            throw new Error(`خطای سینتکس در خط ${i + 1}: ${e.message}`);
+          }
+        }
+        return list;
+      }
+
+      function downloadFile(content, fileName, contentType) {
+        const a = document.createElement("a");
+        const file = new Blob([content], { type: contentType });
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        log(`فایل خروجی با موفقیت آماده دانلود شد: ${fileName}`);
+      }
+
+      // Utils
+      function toFaDigit(n) {
+        if (n == null) return "";
+        return String(n).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Initialize on load
+      window.addEventListener("DOMContentLoaded", init);
+    })();
+  </script>
+</body>
+</html>
